@@ -19,6 +19,12 @@ static var selection: Array[TimelinePoint] = []
 
 signal selection_updated
 
+var inst_muted: bool:
+	set(value):
+		inst_muted = value
+		
+		ChartEditor.song_audio_player.stream.set_sync_stream_volume(0, -999 if inst_muted else 0)
+
 var _song_audio_player: SongAudioPlayer
 
 var _undo_redo: UndoRedo

@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://8qdewobvxyvx" path="res://b3gd/chart_editor/right_bar_scroll.gd" id="12_60gf8"]
 [ext_resource type="Script" uid="uid://b8iga0makf0yj" path="res://b3gd/chart_editor/chart_preview.gd" id="13_h2m7h"]
 [ext_resource type="Script" uid="uid://dg70d3jxftqvr" path="res://b3gd/chart_editor/editor_timeline.gd" id="18_bgg50"]
+[ext_resource type="Script" uid="uid://d1cnb4hugwiyp" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_checkbox.gd" id="20_tfe68"]
 
 [sub_resource type="Resource" id="Resource_5aops"]
 script = ExtResource("3_cm7rd")
@@ -646,6 +647,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 focus_mode = 0
 alignment = 1
+
+[node name="PropertyGetterSetterCheckBox" type="Node" parent="UIContainer/RightBarScroll/RightBarContainer/EditorOptionsPanel/Margin/VBox/PlaybackFieldContainer/MuteInst" unique_id=2028920791 node_paths=PackedStringArray("node")]
+script = ExtResource("20_tfe68")
+node = NodePath("../../../../../../../../..")
+property_path = "inst_muted"
+metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
 
 [node name="Images" type="Control" parent="." unique_id=1867479190]
 layout_mode = 2
