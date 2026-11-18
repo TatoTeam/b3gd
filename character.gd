@@ -118,6 +118,7 @@ func note_miss(strum_line_id: int, receptor_id: int, _note: Note) -> void:
 	
 	play_animation(AnimationType.ANIMATION_MISS, receptor_id)
 
+
 func play_animation(type: AnimationType, id:int = 0, suffix: String = ""):
 	current_anim.type = type
 	current_anim.id = id
