@@ -48,4 +48,6 @@ func _process(_delta: float) -> void:
 	var receptor_y := (note_area.get_global_transform().affine_inverse() * timeline.work_area.get_global_transform() * Vector2(0.0, timeline.receptor_y_pos)).y
 
 	for dir in count:
-		_receptor_nodes[dir].position = Vector2(dir * note_size, receptor_y - note_size / 2.0)
+		_receptor_nodes[dir].position = Vector2(dir * note_size, receptor_y)
+		_receptor_nodes[dir].scale.y = min(1.0, ChartEditor.instance.settings.editor_zoom)
+		_receptor_nodes[dir].position.y += -(_receptor_nodes[dir].size.y * _receptor_nodes[dir].scale.y * 0.5)

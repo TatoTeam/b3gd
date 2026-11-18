@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://b8gjbx3i2jm2l" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_strumline_vertical_placement.gd" id="11_2t1h5"]
 [ext_resource type="Script" uid="uid://xaasgffpm80p" path="res://b3gd/chart_editor/file_buttons.gd" id="11_u13mf"]
 [ext_resource type="Script" uid="uid://8qdewobvxyvx" path="res://b3gd/chart_editor/right_bar_scroll.gd" id="12_60gf8"]
+[ext_resource type="Script" uid="uid://b8iga0makf0yj" path="res://b3gd/chart_editor/chart_preview.gd" id="13_h2m7h"]
 [ext_resource type="Script" uid="uid://dg70d3jxftqvr" path="res://b3gd/chart_editor/editor_timeline.gd" id="18_bgg50"]
 
 [sub_resource type="Resource" id="Resource_5aops"]
@@ -292,6 +293,16 @@ axis_stretch_vertical = 1
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 script = ExtResource("8_4ei61")
+
+[node name="Control" type="Control" parent="UIContainer/SongScrubber" unique_id=934526360]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("13_h2m7h")
 
 [node name="RightBarScroll" type="ScrollContainer" parent="UIContainer" unique_id=1377599752]
 layout_mode = 2

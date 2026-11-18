@@ -2,19 +2,7 @@ extends Control
 class_name EditorNote
 
 const NOTES: CompressedTexture2D = preload("uid://bdkks2vfqiwwd")
-const QUANT_LIST := [4, 8, 12, 16, 24, 32, 48, 64]
 
-static var QUANT_COLORS: Array[Color] = [
-	Color.from_string("e01e00", Color.BLACK),
-	Color.from_string("003fed", Color.BLACK),
-	Color.from_string("8300e0", Color.BLACK),
-	Color.from_string("4ab50d", Color.BLACK),
-	Color.from_string("db1fd2", Color.BLACK),
-	Color.from_string("e0bb00", Color.BLACK),
-	Color.from_string("e67cb1", Color.BLACK),
-	Color.from_string("48d9c3", Color.BLACK),
-	Color.from_string("999999", Color.BLACK)
-]
 
 static var note_texture_arrays = preload("res://b3gd/multikey.json").data
 
@@ -31,15 +19,6 @@ var _visual_state: Array = []
 
 static func get_note_vector_array(receptor_count: int) -> Array:
 	return note_texture_arrays[str(min(receptor_count, note_texture_arrays.size()))]
-
-static func get_quant_id(note_time: float) -> int:
-	var note_beat = ChartEditor.song_audio_player.get_beat_from_seconds(note_time)
-	var note_beat_sm: int = round(note_beat * 48.0)
-	for i in QUANT_LIST.size():
-		if note_beat_sm % (192 / QUANT_LIST[i]) == 0:
-			return i
-	
-	return 8
 
 func _ready() -> void:
 	for rect: TextureRect in [head, head_color, hold, hold_color]:
@@ -74,7 +53,7 @@ func update_visuals(columns: int, pixels_per_second: float, timing_revision: int
 	(hold.texture as AtlasTexture).region = hold_region
 	(hold_color.texture as AtlasTexture).region = hold_region
 
-	var color: Color = QUANT_COLORS[get_quant_id(note.time)]
+	var color: Color = ChartEditor.get_quant_color(note.time)
 	head_color.modulate = color
 	hold_color.modulate = color
 	head_color.visible = not preview

@@ -150,4 +150,7 @@ func _update_preview() -> void:
 	preview.direction = note_dir
 
 	preview.position = Vector2(timeline.global_to_timeline(global_position).x + note_dir * ChartEditor.instance.settings.NOTE_SIZE, note_time * timeline.pixels_per_second)
+	preview.head.scale.y = min(1.0, ChartEditor.instance.settings.editor_zoom)
+	preview.head.position.y = -(preview.head.size.y * preview.head.scale.y * 0.5)
+	
 	preview.update_visuals(strumline_object.strumline.receptors.size(), timeline.pixels_per_second, timeline.timing_revision, true)

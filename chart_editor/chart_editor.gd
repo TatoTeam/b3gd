@@ -23,6 +23,37 @@ var _song_audio_player: SongAudioPlayer
 
 var _undo_redo: UndoRedo
 
+
+const QUANT_LIST := [4, 8, 12, 16, 24, 32, 48, 64]
+
+static var QUANT_COLORS: Array[Color] = [
+	Color.from_string("e01e00", Color.BLACK),
+	Color.from_string("003fed", Color.BLACK),
+	Color.from_string("8300e0", Color.BLACK),
+	Color.from_string("4ab50d", Color.BLACK),
+	Color.from_string("db1fd2", Color.BLACK),
+	Color.from_string("e0bb00", Color.BLACK),
+	Color.from_string("e67cb1", Color.BLACK),
+	Color.from_string("48d9c3", Color.BLACK),
+	Color.from_string("999999", Color.BLACK)
+]
+
+static func get_quant_id(note_time: float) -> int:
+	var note_beat = ChartEditor.song_audio_player.get_beat_from_seconds(note_time)
+	var note_beat_sm: int = round(note_beat * 48.0)
+	for i in QUANT_LIST.size():
+		if note_beat_sm % (192 / QUANT_LIST[i]) == 0:
+			return i
+	return 8
+
+static func get_quant_color(note_time: float) -> Color:
+	var note_beat = ChartEditor.song_audio_player.get_beat_from_seconds(note_time)
+	var note_beat_sm: int = round(note_beat * 48.0)
+	for i in QUANT_LIST.size():
+		if note_beat_sm % (192 / QUANT_LIST[i]) == 0:
+			return QUANT_COLORS[i]
+	return QUANT_COLORS[8]
+
 static func select_only(selectable: TimelinePoint):
 	undo_redo.create_action("Select Selectable Only")
 	

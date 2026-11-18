@@ -91,6 +91,9 @@ func _sync_notes() -> void:
 				node.direction = dir
 				node.position = Vector2(origin_x + dir * ChartEditor.instance.settings.NOTE_SIZE, note.time * pixels_per_second)
 				node.update_visuals(receptors.size(), pixels_per_second, timing_revision)
+				
+				node.head.scale.y = min(1.0, ChartEditor.instance.settings.editor_zoom)
+				node.head.position.y = -(node.head.size.y * node.head.scale.y * 0.5)
 	
 	_remove_missing(note_nodes, present)
 
