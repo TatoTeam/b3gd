@@ -24,7 +24,7 @@ func load_chart():
 	load_notes(false)
 	load_events()
 
-var vocal_layers = []
+var vocal_layers: Array[int] = []
 
 func load_tracks():
 	var chart = chart_player.chart
@@ -33,21 +33,31 @@ func load_tracks():
 		chart.tracks.mixed_vocals
 	]
 	
-	var start_index = tracks.size() - 1
 	tracks.append_array(chart.tracks.vocal_layers)
-	vocal_layers = []
 	
-	if chart.tracks.vocal_layers.size() == 0:
-		for i in chart.strum_lines.size():
-			vocal_layers.append(1)
-	
-	for i in chart.tracks.vocal_layers.size():
-		vocal_layers.append(i + start_index)
+	var track_indices: Array[int] = []
+	var present_tracks: Array[AudioStream] = []
 	
 	for track in tracks:
-		if track == null:
-			tracks.erase(track)
+		track_indices.append(present_tracks.size() if track != null else -1)
+		if track != null:
+			present_tracks.append(track)
 	
+	vocal_layers.clear()
+	
+	for i in chart.strum_lines.size():
+		var vocal_layer := -1
+		
+		if i < chart.tracks.vocal_layers.size():
+			vocal_layer = track_indices[i + 2]
+		
+		if vocal_layer < 0:
+			vocal_layer = track_indices[1]
+		
+		vocal_layers.append(vocal_layer)
+	
+	tracks = present_tracks
+
 	var audio_stream = AudioStreamSynchronized.new()
 	audio_stream.stream_count = tracks.size()
 	
