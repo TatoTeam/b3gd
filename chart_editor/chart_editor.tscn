@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://o1e3rmny0lrd" path="res://b3gd/chart_editor/editor_strum_line_container.gd" id="5_5aops"]
 [ext_resource type="Texture2D" uid="uid://cnjiglqj2tbq5" path="res://b3gd/im mad.png" id="5_cm7rd"]
 [ext_resource type="Script" uid="uid://c2h6ba3oufvlp" path="res://b3gd/chart_editor/class_selector_box.gd" id="5_yrq2n"]
+[ext_resource type="Script" uid="uid://uba06rj25tk5" path="res://b3gd/chart_data/events/event.gd" id="7_b7wb1"]
 [ext_resource type="Script" uid="uid://ceksh73iln201" path="res://b3gd/chart_editor/song_scrubber.gd" id="8_4ei61"]
 [ext_resource type="Script" uid="uid://bw7313hxy48rr" path="res://b3gd/chart_editor/time_format_box.gd" id="9_046nn"]
 [ext_resource type="Script" uid="uid://jjehc0kg4qs7" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_timer.gd" id="9_747oa"]
@@ -235,7 +236,7 @@ fit_to_longest_item = false
 search_bar_enabled = true
 search_bar_min_item_count = 9
 script = ExtResource("5_yrq2n")
-script_path = "res://b3gd/chart_data/events/event.gd"
+class_script = ExtResource("7_b7wb1")
 
 [node name="Timeline" type="Control" parent="UIContainer/WorkAreaScroll/Container/TimelineContainer" unique_id=264450829]
 process_physics_priority = -10
