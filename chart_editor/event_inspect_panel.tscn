@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://cvfmaitmtiau6"]
+
+[ext_resource type="Script" uid="uid://w8vj31mjjy6i" path="res://b3gd/chart_editor/event_inspect_panel.gd" id="1_4g45d"]
+[ext_resource type="Texture2D" uid="uid://hwm18sid4ysu" path="res://b3gd/chart_editor/ui/atlas.png" id="1_wfidy"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xayn1"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+texture = ExtResource("1_wfidy")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(96, 0, 16, 16)
+
+[sub_resource type="FontVariation" id="FontVariation_csxqf"]
+variation_embolden = 1.0
+spacing_top = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_4huly"]
+font = SubResource("FontVariation_csxqf")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhun1"]
+atlas = ExtResource("1_wfidy")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52wg0"]
+atlas = ExtResource("1_wfidy")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48w3h"]
+atlas = ExtResource("1_wfidy")
+region = Rect2(32, 48, 16, 16)
+
+[node name="EventInspectPanel" type="PanelContainer" unique_id=1590116714]
+script = ExtResource("1_4g45d")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=802236669]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="EventContainer" type="VBoxContainer" parent="Margin" unique_id=1610236114]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="Margin/EventContainer" unique_id=1475967308]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="EventID" type="Button" parent="Margin/EventContainer/Header" unique_id=532403264]
+editor_description = "Its a button so it looks like that don't worry its not like a  functionality thing"
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/disabled = SubResource("StyleBoxTexture_xayn1")
+disabled = true
+text = "0"
+
+[node name="EventHeader" type="Label" parent="Margin/EventContainer/Header" unique_id=1405074450]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Event"
+label_settings = SubResource("LabelSettings_4huly")
+clip_text = true
+
+[node name="CopyButton" type="Button" parent="Margin/EventContainer/Header" unique_id=1837588513]
+layout_mode = 2
+size_flags_horizontal = 8
+icon = SubResource("AtlasTexture_yhun1")
+
+[node name="PasteButton" type="Button" parent="Margin/EventContainer/Header" unique_id=2146382401]
+layout_mode = 2
+size_flags_horizontal = 8
+disabled = true
+icon = SubResource("AtlasTexture_52wg0")
+
+[node name="CloseButton" type="Button" parent="Margin/EventContainer/Header" unique_id=2130686274]
+layout_mode = 2
+size_flags_horizontal = 8
+icon = SubResource("AtlasTexture_48w3h")
+
+[node name="HeaderSeperator" type="HSeparator" parent="Margin/EventContainer" unique_id=1472978309]
+layout_mode = 2
+
+[node name="EventFieldContainer" type="VBoxContainer" parent="Margin/EventContainer" unique_id=1334365226]
+layout_mode = 2

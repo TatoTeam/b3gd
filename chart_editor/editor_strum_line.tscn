@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://b7l3q0pg1d1ir"]
+
+[ext_resource type="Script" uid="uid://dp3c6qf8p0ime" path="res://b3gd/chart_editor/editor_strum_line.gd" id="1_6wfxj"]
+[ext_resource type="Script" uid="uid://bdttvldel5y85" path="res://b3gd/chart_editor/receptor_control.gd" id="2_cq5xl"]
+[ext_resource type="Texture2D" uid="uid://hwm18sid4ysu" path="res://b3gd/chart_editor/ui/atlas.png" id="3_t2trj"]
+[ext_resource type="Script" uid="uid://d1cnb4hugwiyp" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_checkbox.gd" id="4_mbbuy"]
+[ext_resource type="Script" uid="uid://d0j3bn53ed8sw" path="res://b3gd/chart_editor/note_placer.gd" id="6_mcovw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u30xk"]
+atlas = ExtResource("3_t2trj")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wb80q"]
+atlas = ExtResource("3_t2trj")
+region = Rect2(16, 96, 16, 16)
+
+[node name="StrumLine" type="VBoxContainer" unique_id=1600336989]
+size_flags_horizontal = 4
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = -4
+script = ExtResource("1_6wfxj")
+
+[node name="InfoPanel" type="PanelContainer" parent="." unique_id=1958028117]
+z_index = 1
+layout_mode = 2
+
+[node name="InfoMargin" type="MarginContainer" parent="InfoPanel" unique_id=1700282008]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="InfoVBox" type="VBoxContainer" parent="InfoPanel/InfoMargin" unique_id=1542519302]
+layout_mode = 2
+alignment = 1
+
+[node name="StrumLineLabel" type="Button" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=52358580]
+editor_description = "Its a button so it looks like that don't worry its not like a  functionality thing"
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+disabled = true
+text = "0"
+
+[node name="ReceptorControl" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=1483075279 node_paths=PackedStringArray("editor_strumline")]
+layout_mode = 2
+script = ExtResource("2_cq5xl")
+editor_strumline = NodePath("../../../..")
+
+[node name="Label" type="Label" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=549249472]
+layout_mode = 2
+text = "Keys:"
+
+[node name="RemoveReceptor" type="Button" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=1961325852]
+layout_mode = 2
+focus_mode = 0
+icon = SubResource("AtlasTexture_u30xk")
+
+[node name="ReceptorCount" type="LineEdit" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=2048991581]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 0
+text = "0"
+alignment = 1
+editable = false
+selecting_enabled = false
+
+[node name="AddReceptor" type="Button" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=449223348]
+layout_mode = 2
+focus_mode = 0
+icon = SubResource("AtlasTexture_wb80q")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=1012254543]
+layout_mode = 2
+
+[node name="MuteCheckBox" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer" unique_id=1836110026]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+focus_mode = 0
+text = "Mute
+"
+
+[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer/MuteCheckBox" unique_id=1208058604 node_paths=PackedStringArray("node")]
+script = ExtResource("4_mbbuy")
+node = NodePath("../../../../../..")
+property_path = "muted"
+metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
+
+[node name="CPUCheckBox" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer" unique_id=468590135]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+focus_mode = 0
+text = "CPU"
+
+[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer/CPUCheckBox" unique_id=572545642 node_paths=PackedStringArray("node")]
+script = ExtResource("4_mbbuy")
+node = NodePath("../../../../../..")
+property_path = "strumline:cpu"
+metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
+
+[node name="NotePlacer" type="ColorRect" parent="." unique_id=892793543]
+texture_repeat = 2
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+color = Color(0.288518, 0.28851798, 0.28851798, 0.3764706)
+script = ExtResource("6_mcovw")
+
+[connection signal="pressed" from="InfoPanel/InfoMargin/InfoVBox/ReceptorControl/RemoveReceptor" to="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" method="_on_remove_receptor_pressed"]
+[connection signal="pressed" from="InfoPanel/InfoMargin/InfoVBox/ReceptorControl/AddReceptor" to="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" method="_on_add_receptor_pressed"]

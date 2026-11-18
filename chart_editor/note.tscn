@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://caf8inimxamen"]
+
+[ext_resource type="Texture2D" uid="uid://bdkks2vfqiwwd" path="res://b3gd/chart_editor/ui/notes.png" id="1_8k6l5"]
+[ext_resource type="Shader" uid="uid://ue58nh5vqgxm" path="res://b3gd/chart_editor/selec.gdshader" id="1_8ujmt"]
+[ext_resource type="Script" uid="uid://dsoh7ukaflmah" path="res://b3gd/chart_editor/editor_note.gd" id="1_cg7uq"]
+[ext_resource type="Texture2D" uid="uid://p6quxyfjutej" path="res://b3gd/chart_editor/ui/notecolor.png" id="2_i6xiv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_px10n"]
+shader = ExtResource("1_8ujmt")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnb0l"]
+atlas = ExtResource("1_8k6l5")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbpyl"]
+atlas = ExtResource("2_i6xiv")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kmdm"]
+atlas = ExtResource("1_8k6l5")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xg86g"]
+atlas = ExtResource("2_i6xiv")
+region = Rect2(0, 128, 64, 64)
+
+[node name="Note" type="Control" unique_id=2124841857]
+material = SubResource("ShaderMaterial_px10n")
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_cg7uq")
+
+[node name="Note" type="TextureRect" parent="." unique_id=996027035]
+use_parent_material = true
+layout_mode = 0
+offset_top = -32.0
+offset_right = 64.0
+offset_bottom = 32.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_qnb0l")
+metadata/_edit_use_anchors_ = true
+
+[node name="Color" type="TextureRect" parent="Note" unique_id=1357515551]
+show_behind_parent = true
+use_parent_material = true
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_hbpyl")
+metadata/_edit_use_anchors_ = true
+
+[node name="Hold" type="TextureRect" parent="." unique_id=37919347]
+use_parent_material = true
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_1kmdm")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Color" type="TextureRect" parent="Hold" unique_id=243821989]
+show_behind_parent = true
+use_parent_material = true
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_xg86g")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="gui_input" from="Note" to="." method="_on_note_gui_input"]
