@@ -20,6 +20,7 @@ var muted: bool = false:
 		if vocal_layer >= 0:
 			ChartEditor.song_audio_player.stream.set_sync_stream_volume(vocal_layer, -999 if muted else 0)
 
+var waveform: bool = false
 
 func load_strumline(p_strumline: StrumLine):
 	strumline = p_strumline

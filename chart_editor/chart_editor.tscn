@@ -241,7 +241,6 @@ class_script = ExtResource("7_b7wb1")
 
 [node name="Timeline" type="Control" parent="UIContainer/WorkAreaScroll/Container/TimelineContainer" unique_id=264450829]
 process_physics_priority = -10
-z_index = 1
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("18_bgg50")

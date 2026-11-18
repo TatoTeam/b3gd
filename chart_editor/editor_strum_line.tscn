@@ -53,6 +53,19 @@ node = NodePath("../../../../../..")
 property_path = "muted"
 metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
 
+[node name="Waveform" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer" unique_id=244038808]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+focus_mode = 0
+text = "Waveform"
+
+[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer/Waveform" unique_id=766629096 node_paths=PackedStringArray("node")]
+script = ExtResource("4_mbbuy")
+node = NodePath("../../../../../..")
+property_path = "waveform"
+metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
+
 [node name="CPUCheckBox" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer" unique_id=468590135]
 layout_mode = 2
 size_flags_horizontal = 6
