@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dtywfawbj6pqb" path="res://b3gd/chart_editor/chart_editor_canvas.gd" id="1_5b7pn"]
 [ext_resource type="PackedScene" uid="uid://0fmbhebqx5x3" path="res://b3gd/chart_editor/chart_editor.tscn" id="1_ihhhq"]
+[ext_resource type="Script" uid="uid://bh7apmcyhq1ow" path="res://b3gd/chart_editor/viewport_scale.gd" id="2_ch5a5"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yt480"]
 blend_mode = 4
@@ -19,6 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
+script = ExtResource("2_ch5a5")
 
 [node name="SubViewport" type="SubViewport" parent="EditorViewport" unique_id=264156091]
 disable_3d = true

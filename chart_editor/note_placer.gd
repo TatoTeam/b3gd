@@ -78,7 +78,16 @@ func add_note():
 	ChartEditor.undo_redo.create_action("Place Note")
 	ChartEditor.clear_selection()
 	
-	remove_note(note_dir, note_time, false)
+	for note in strumline_object.strumline.receptors[note_dir].notes:
+		if (note.time > note_time and note.time <= note_time + note_length) or note.time == note_time:
+			remove_note(note_dir, note.time, false)
+		if (note_time > note.time and note_time <= note.time + note.length):
+			var snap = (4.0 / ChartEditor.instance.settings.snapping)
+			var new_note_length_beat = ChartEditor.song_audio_player.get_beat_from_seconds((note_time - note.time)) - snap
+			var new_note_length = max(ChartEditor.song_audio_player.get_seconds_from_beat(new_note_length_beat), 0)
+			
+			ChartEditor.undo_redo.add_do_property(note, "length", new_note_length)
+			ChartEditor.undo_redo.add_undo_property(note, "length", note.length)
 	
 	var receptor: Receptor = strumline_object.strumline.receptors.get(note_dir)
 	var new_note := Note.new()

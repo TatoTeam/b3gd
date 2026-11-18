@@ -36,43 +36,6 @@ theme_override_constants/margin_bottom = 4
 layout_mode = 2
 alignment = 1
 
-[node name="StrumLineLabel" type="Button" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=52358580]
-editor_description = "Its a button so it looks like that don't worry its not like a  functionality thing"
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-disabled = true
-text = "0"
-
-[node name="ReceptorControl" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=1483075279 node_paths=PackedStringArray("editor_strumline")]
-layout_mode = 2
-script = ExtResource("2_cq5xl")
-editor_strumline = NodePath("../../../..")
-
-[node name="Label" type="Label" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=549249472]
-layout_mode = 2
-text = "Keys:"
-
-[node name="RemoveReceptor" type="Button" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=1961325852]
-layout_mode = 2
-focus_mode = 0
-icon = SubResource("AtlasTexture_u30xk")
-
-[node name="ReceptorCount" type="LineEdit" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=2048991581]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-focus_mode = 0
-text = "0"
-alignment = 1
-editable = false
-selecting_enabled = false
-
-[node name="AddReceptor" type="Button" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=449223348]
-layout_mode = 2
-focus_mode = 0
-icon = SubResource("AtlasTexture_wb80q")
-
 [node name="HBoxContainer" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=1012254543]
 layout_mode = 2
 
@@ -102,6 +65,35 @@ script = ExtResource("4_mbbuy")
 node = NodePath("../../../../../..")
 property_path = "strumline:cpu"
 metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
+
+[node name="ReceptorControl" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=1483075279 node_paths=PackedStringArray("editor_strumline")]
+layout_mode = 2
+script = ExtResource("2_cq5xl")
+editor_strumline = NodePath("../../../..")
+
+[node name="Label" type="Label" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=549249472]
+layout_mode = 2
+text = "Keys:"
+
+[node name="RemoveReceptor" type="Button" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=1961325852]
+layout_mode = 2
+focus_mode = 0
+icon = SubResource("AtlasTexture_u30xk")
+
+[node name="ReceptorCount" type="LineEdit" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=2048991581]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 0
+text = "0"
+alignment = 1
+editable = false
+selecting_enabled = false
+
+[node name="AddReceptor" type="Button" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=449223348]
+layout_mode = 2
+focus_mode = 0
+icon = SubResource("AtlasTexture_wb80q")
 
 [node name="NotePlacer" type="ColorRect" parent="." unique_id=892793543]
 texture_repeat = 2
