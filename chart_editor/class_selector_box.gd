@@ -1,7 +1,7 @@
 extends OptionButton
 
 
-@export var script_path: String
+@export var class_script: Script
 
 var class_paths = []
 
@@ -11,7 +11,7 @@ func _ready() -> void:
 			continue
 		
 		var loaded_class := load(global_class.path)
-		if loaded_class != null && does_script_extend_class(loaded_class, script_path):
+		if loaded_class != null && does_script_extend_class(loaded_class, class_script):
 			if global_class.is_abstract == true:
 				continue
 			
@@ -24,11 +24,11 @@ func _ready() -> void:
 	
 	selected = -1
 
-func does_script_extend_class(base_script: Script, class_script_path: String) -> bool:
+func does_script_extend_class(base_script: Script, p_class_script: Script) -> bool:
 	var current: Script = base_script
 	
 	while current != null:
-		if current.get_path() == class_script_path:
+		if current.get_path() == p_class_script.get_path():
 			return true
 		
 		current = current.get_base_script()
