@@ -46,7 +46,7 @@ func _has_point(point: Vector2) -> bool:
 	return true
 
 func remove_note(receptor: int, time: float, create_new_action: bool = true):
-	if receptor > strumline_object.strumline.receptors.size() - 1 || receptor < 0: 
+	if receptor > strumline_object.strumline.receptors.size() - 1 or receptor < 0: 
 		return
 	
 	var notes = strumline_object.strumline.receptors[receptor].notes
@@ -74,7 +74,7 @@ func remove_note(receptor: int, time: float, create_new_action: bool = true):
 			break
 
 func add_note():
-	if note_dir > strumline_object.strumline.receptors.size() - 1 || note_dir < 0: 
+	if note_dir > strumline_object.strumline.receptors.size() - 1 or note_dir < 0: 
 		return
 	
 	ChartEditor.undo_redo.create_action("Place Note")

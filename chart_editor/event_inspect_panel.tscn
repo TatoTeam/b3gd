@@ -74,4 +74,6 @@ layout_mode = 2
 [node name="EventFieldContainer" type="VBoxContainer" parent="Margin/EventContainer" unique_id=1334365226]
 layout_mode = 2
 
+[connection signal="pressed" from="Margin/EventContainer/Header/CopyButton" to="." method="_on_copy_button_pressed"]
+[connection signal="pressed" from="Margin/EventContainer/Header/PasteButton" to="." method="_on_paste_button_pressed"]
 [connection signal="pressed" from="Margin/EventContainer/Header/CloseButton" to="." method="_on_close_button_pressed"]

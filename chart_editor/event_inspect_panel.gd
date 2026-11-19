@@ -4,12 +4,32 @@ class_name InspectPanel
 @export var header_variation: FontVariation
 @onready var header = $Margin/EventContainer/Header/EventHeader
 @onready var field_container = $Margin/EventContainer/EventFieldContainer
-
+@onready var paste_button = $Margin/EventContainer/Header/PasteButton
+var timeline_point_source: Array
 var timeline_point: TimelinePoint
 
+func _process(_delta: float) -> void:
+	var clipboard_object = str_to_var(DisplayServer.clipboard_get())
+	
+	if !clipboard_object is TimelinePoint:
+		if !paste_button.disabled:
+			paste_button.disabled = true
+		return
+	
+	if clipboard_object.get_script().get_global_name() == timeline_point.get_script().get_global_name():
+		if paste_button.disabled:
+			paste_button.disabled = false
+	elif !paste_button.disabled:
+		paste_button.disabled = true
 
 func _load_event(p_timeline_point: TimelinePoint):
 	timeline_point = p_timeline_point
+	
+	if timeline_point is Event:
+		timeline_point_source = ChartEditor.instance.chart.events
+	if timeline_point is Note:
+		timeline_point_source = ChartEditor.instance.chart.events
+	
 	header.text = timeline_point.get_script().get_global_name()
 	
 	for child in field_container.get_children():
@@ -43,8 +63,7 @@ func _load_event(p_timeline_point: TimelinePoint):
 		field_container.remove_child(child)
 	if field_container.get_children().size() == 0:
 		hide()
-	
-	
+
 func _add_field(label_text: String, property_path: String, type: int, hint: int = PROPERTY_HINT_NONE, hint_string: String = ""):
 	var row = HBoxContainer.new()
 	var label = Label.new()
@@ -112,7 +131,6 @@ func _add_field(label_text: String, property_path: String, type: int, hint: int 
 	row.add_child(input)
 	field_container.add_child(row)
 
-
 func _on_close_button_pressed() -> void:
 	ChartEditor.remove_from_selection(timeline_point)
 	
@@ -145,3 +163,33 @@ func _on_close_button_pressed() -> void:
 	)
 	
 	ChartEditor.undo_redo.commit_action()
+
+func _on_copy_button_pressed() -> void:
+	var copied_data = timeline_point.duplicate_deep(Resource.DEEP_DUPLICATE_INTERNAL)
+	if copied_data is Event:
+		copied_data.parent = null
+	DisplayServer.clipboard_set(var_to_str(copied_data))
+
+func _on_paste_button_pressed() -> void:
+	var clipboard_object = str_to_var(DisplayServer.clipboard_get())
+	
+	if !clipboard_object is TimelinePoint:
+		if !paste_button.disabled:
+			paste_button.disabled = true
+		return
+	
+	if clipboard_object.get_script().get_global_name() != timeline_point.get_script().get_global_name():
+		return
+	
+	clipboard_object.time = timeline_point.time
+	if timeline_point is Event:
+		clipboard_object.lane = timeline_point.lane
+	if timeline_point is Note:
+		clipboard_object.length = timeline_point.length
+	
+	for property in timeline_point.get_property_list():
+		if !(property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE): 
+			continue
+		if !(property.usage & PROPERTY_USAGE_EDITOR): 
+			continue
+		timeline_point.set(property.name, clipboard_object.get(property.name))
