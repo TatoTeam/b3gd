@@ -1,6 +1,8 @@
 extends Control
 class_name EditorTimeline
 
+static var instance: EditorTimeline
+
 const NOTE_SCENE: PackedScene = preload("res://b3gd/chart_editor/note.tscn")
 const EVENT_SCENE: PackedScene = preload("res://b3gd/chart_editor/event.tscn")
 const EVENT_ICON: Texture2D = preload("res://b3gd/chart_editor/event_unknown.png")
@@ -33,6 +35,9 @@ var receptor_y_pos: float:
 var vocal_peaks: Dictionary[AudioStream, PackedFloat32Array] = {}
 var _waveform_playbacks: Dictionary[AudioStream, AudioStreamPlayback] = {}
 var _waveform_frames: Dictionary[AudioStream, int] = {}
+
+func _init():
+	instance = self
 
 func _get_vocal_stream(strumline: StrumLine) -> AudioStream:
 	var index := ChartEditor.instance.chart.strum_lines.find(strumline)
@@ -258,7 +263,7 @@ func get_event_origin_x() -> float:
 
 func get_script_icon(script: Script) -> Texture2D:
 	if script == null:
-		return EVENT_ICON
+		return null
 	if _script_icons.has(script):
 		return _script_icons[script]
 	
@@ -268,11 +273,11 @@ func get_script_icon(script: Script) -> Texture2D:
 		_icons_initialized = true
 	
 	var path: String = _class_icon_paths.get(script.resource_path, "")
-	var icon: Texture2D = EVENT_ICON
+	var icon: Texture2D = null
 	if not path.is_empty():
 		icon = load(path) as Texture2D
 		if icon == null:
-			icon = EVENT_ICON
+			icon = null
 	
 	_script_icons[script] = icon
 	return icon

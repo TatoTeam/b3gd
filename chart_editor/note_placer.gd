@@ -92,7 +92,7 @@ func add_note():
 			ChartEditor.undo_redo.add_undo_property(note, "length", note.length)
 	
 	var receptor: Receptor = strumline_object.strumline.receptors.get(note_dir)
-	var new_note := Note.new()
+	var new_note: Note = load(ChartEditor.current_note_type).new()
 	new_note.time = note_time
 	new_note.length = note_length
 	

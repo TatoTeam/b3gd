@@ -2,8 +2,10 @@ extends OptionButton
 
 
 @export var class_script: Script
+@export var default_selection: int = -1
 
 var class_paths = []
+
 
 func _ready() -> void:
 	for global_class in ProjectSettings.get_global_class_list():
@@ -22,7 +24,7 @@ func _ready() -> void:
 			
 			class_paths.append(global_class.path)
 	
-	selected = -1
+	selected = default_selection
 
 func does_script_extend_class(base_script: Script, p_class_script: Script) -> bool:
 	var current: Script = base_script

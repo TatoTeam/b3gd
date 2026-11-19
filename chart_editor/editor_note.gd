@@ -3,7 +3,6 @@ class_name EditorNote
 
 const NOTES: CompressedTexture2D = preload("uid://bdkks2vfqiwwd")
 
-
 static var note_texture_arrays = preload("res://b3gd/multikey.json").data
 
 var note: Note
@@ -12,6 +11,7 @@ var note_placer: ColorRect
 var direction: int
 var _visual_state: Array = []
 
+@onready var class_icon = $ClassIcon
 @onready var head: TextureRect = $Note
 @onready var head_color: TextureRect = $Note/Color
 @onready var hold: TextureRect = $Hold
@@ -24,9 +24,12 @@ func _ready() -> void:
 	for rect: TextureRect in [head, head_color, hold, hold_color]:
 		rect.texture = rect.texture.duplicate()
 	
+	class_icon.texture = EditorTimeline.instance.get_script_icon(note.get_script())
+	
 	ChartEditor.instance.selection_updated.connect(func():
 		update_selection()
 	)
+	
 	update_selection()
 
 func update_selection():

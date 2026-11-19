@@ -12,6 +12,8 @@ static var song_audio_player: SongAudioPlayer:
 
 static var selection: Array[TimelinePoint] = []
 
+static var current_note_type: String
+
 @export var chart: Chart
 @export var settings: ChartEditorSettings
 

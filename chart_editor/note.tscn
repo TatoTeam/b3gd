@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://ue58nh5vqgxm" path="res://b3gd/chart_editor/selec.gdshader" id="1_8ujmt"]
 [ext_resource type="Script" uid="uid://dsoh7ukaflmah" path="res://b3gd/chart_editor/editor_note.gd" id="1_cg7uq"]
 [ext_resource type="Texture2D" uid="uid://p6quxyfjutej" path="res://b3gd/chart_editor/ui/notecolor.png" id="2_i6xiv"]
+[ext_resource type="Texture2D" uid="uid://fqdjk4wjoxty" path="res://b3gd/chart_data/notes/note_suffix.png" id="5_px10n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_px10n"]
 shader = ExtResource("1_8ujmt")
@@ -49,6 +50,17 @@ offset_right = 64.0
 offset_bottom = 64.0
 mouse_filter = 2
 texture = SubResource("AtlasTexture_hbpyl")
+metadata/_edit_use_anchors_ = true
+
+[node name="ClassIcon" type="TextureRect" parent="." unique_id=1953150518]
+use_parent_material = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = -16.0
+offset_right = 48.0
+offset_bottom = 16.0
+mouse_filter = 2
+texture = ExtResource("5_px10n")
 metadata/_edit_use_anchors_ = true
 
 [node name="Hold" type="TextureRect" parent="." unique_id=37919347]

@@ -125,6 +125,7 @@ focus_mode = 0
 icon = SubResource("AtlasTexture_wb80q")
 
 [node name="NotePlacer" type="ColorRect" parent="." unique_id=892793543]
+z_index = -1
 texture_repeat = 2
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
