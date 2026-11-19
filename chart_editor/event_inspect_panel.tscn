@@ -3,17 +3,8 @@
 [ext_resource type="Script" uid="uid://w8vj31mjjy6i" path="res://b3gd/chart_editor/event_inspect_panel.gd" id="1_4g45d"]
 [ext_resource type="Texture2D" uid="uid://hwm18sid4ysu" path="res://b3gd/chart_editor/ui/atlas.png" id="1_wfidy"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xayn1"]
-content_margin_left = 5.0
-content_margin_top = 2.0
-content_margin_right = 5.0
-content_margin_bottom = 2.0
-texture = ExtResource("1_wfidy")
-texture_margin_left = 5.0
-texture_margin_top = 5.0
-texture_margin_right = 5.0
-texture_margin_bottom = 5.0
-region_rect = Rect2(96, 0, 16, 16)
+[sub_resource type="FontVariation" id="FontVariation_vfqny"]
+variation_embolden = 1.0
 
 [sub_resource type="FontVariation" id="FontVariation_csxqf"]
 variation_embolden = 1.0
@@ -34,8 +25,9 @@ region = Rect2(16, 32, 16, 16)
 atlas = ExtResource("1_wfidy")
 region = Rect2(32, 48, 16, 16)
 
-[node name="EventInspectPanel" type="PanelContainer" unique_id=1590116714]
+[node name="InspectPanel" type="PanelContainer" unique_id=1590116714]
 script = ExtResource("1_4g45d")
+header_variation = SubResource("FontVariation_vfqny")
 
 [node name="Margin" type="MarginContainer" parent="." unique_id=802236669]
 layout_mode = 2
@@ -51,14 +43,6 @@ layout_mode = 2
 [node name="Header" type="HBoxContainer" parent="Margin/EventContainer" unique_id=1475967308]
 layout_mode = 2
 theme_override_constants/separation = 2
-
-[node name="EventID" type="Button" parent="Margin/EventContainer/Header" unique_id=532403264]
-editor_description = "Its a button so it looks like that don't worry its not like a  functionality thing"
-layout_mode = 2
-theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
-theme_override_styles/disabled = SubResource("StyleBoxTexture_xayn1")
-disabled = true
-text = "0"
 
 [node name="EventHeader" type="Label" parent="Margin/EventContainer/Header" unique_id=1405074450]
 layout_mode = 2
@@ -89,3 +73,5 @@ layout_mode = 2
 
 [node name="EventFieldContainer" type="VBoxContainer" parent="Margin/EventContainer" unique_id=1334365226]
 layout_mode = 2
+
+[connection signal="pressed" from="Margin/EventContainer/Header/CloseButton" to="." method="_on_close_button_pressed"]

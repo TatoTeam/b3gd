@@ -1,27 +1,50 @@
 extends PanelContainer
-class_name EventInspectPanel
+class_name InspectPanel
 
-@onready var event_id = $Margin/EventContainer/Header/EventID
-@onready var event_header = $Margin/EventContainer/Header/EventHeader
-@onready var event_field_container = $Margin/EventContainer/EventFieldContainer
+@export var header_variation: FontVariation
+@onready var header = $Margin/EventContainer/Header/EventHeader
+@onready var field_container = $Margin/EventContainer/EventFieldContainer
 
-var event: Event
+var timeline_point: TimelinePoint
 
 
-func _load_event(p_event: Event):
-	event = p_event
-	event_header.text = event.get_script().get_global_name()
+func _load_event(p_timeline_point: TimelinePoint):
+	timeline_point = p_timeline_point
+	header.text = timeline_point.get_script().get_global_name()
 	
-	for child in event_field_container.get_children():
-		event_field_container.remove_child(child)
+	for child in field_container.get_children():
+		field_container.remove_child(child)
 		child.queue_free()
 	
-	for property in event.get_property_list():
-		if !(property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE): continue
-		if !(property.usage & PROPERTY_USAGE_EDITOR): continue
+	var current_header = ""
+	for property in timeline_point.get_property_list():
+		if !(property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE): 
+			current_header = property.name
+			if !current_header.ends_with(".gd"):
+				continue
+			
+			var label = Label.new()
+			label.text = current_header
+			label.label_settings = LabelSettings.new()
+			label.label_settings.font = header_variation
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			field_container.add_child(label)
+			
+			continue
+		if !(property.usage & PROPERTY_USAGE_EDITOR): 
+			continue
 		
 		_add_field(property.name.capitalize(), property.name, property.type, property.hint, property.hint_string)
-
+	
+	var child_count = field_container.get_children().size()
+	var cutoff_children = field_container.get_children().slice(child_count - 4)
+	for child in cutoff_children:
+		field_container.remove_child(child)
+	if field_container.get_children().size() == 0:
+		hide()
+	
+	
 func _add_field(label_text: String, property_path: String, type: int, hint: int = PROPERTY_HINT_NONE, hint_string: String = ""):
 	var row = HBoxContainer.new()
 	var label = Label.new()
@@ -82,9 +105,43 @@ func _add_field(label_text: String, property_path: String, type: int, hint: int 
 	
 	input.custom_minimum_size.x = 120
 	binding.node = self
-	binding.resource = event
+	binding.resource = timeline_point
 	binding.property_path = property_path
 	input.add_child(binding)
-	binding.set_incoming_value(event.get_indexed(property_path))
+	binding.set_incoming_value(timeline_point.get_indexed(property_path))
 	row.add_child(input)
-	event_field_container.add_child(row)
+	field_container.add_child(row)
+
+
+func _on_close_button_pressed() -> void:
+	ChartEditor.remove_from_selection(timeline_point)
+	
+	ChartEditor.undo_redo.create_action("Remove Timeline Point From Inspector")
+	ChartEditor.undo_redo.add_do_reference(timeline_point)
+	
+	var chart = ChartEditor.instance.chart
+	var array = null
+	if timeline_point is Note:
+		array = chart.strum_lines
+		for strum_line in array:
+			for receptor in strum_line.receptors:
+				if receptor.notes.find(timeline_point) >= 0:
+					array = receptor.notes
+	
+	if timeline_point is Event:
+		array = chart.events
+	
+	if array == null:
+		return
+	
+	ChartEditor.undo_redo.add_do_method(func():
+		array.erase(timeline_point)
+		ChartLoader.instance.load_notes()
+	)
+	
+	ChartEditor.undo_redo.add_undo_method(func():
+		array.append(timeline_point)
+		ChartLoader.instance.load_notes()
+	)
+	
+	ChartEditor.undo_redo.commit_action()

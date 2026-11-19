@@ -3,19 +3,18 @@ extends ScrollContainer
 @onready var right_bar_container = $RightBarContainer
 const EVENT_INSPECT_PANEL = preload("uid://cvfmaitmtiau6")
 
-var inspection_panels: Dictionary[Event, EventInspectPanel] = {}
+var inspection_panels: Dictionary[TimelinePoint, InspectPanel] = {}
 
 func _ready():
 	ChartEditor.instance.selection_updated.connect(func():
 		for selectable_object in ChartEditor.instance.selection:
-			if selectable_object is Event:
-				var event: Event = selectable_object as Event
-				if inspection_panels.keys().has(event): continue
-				
-				var inspect_panel: EventInspectPanel = EVENT_INSPECT_PANEL.instantiate()
-				right_bar_container.add_child(inspect_panel)
-				inspection_panels[event] = inspect_panel
-				inspect_panel._load_event(event)
+			if inspection_panels.keys().has(selectable_object): 
+				continue
+			
+			var inspect_panel: InspectPanel = EVENT_INSPECT_PANEL.instantiate()
+			right_bar_container.add_child(inspect_panel)
+			inspection_panels[selectable_object] = inspect_panel
+			inspect_panel._load_event(selectable_object)
 		
 		for event in inspection_panels.keys().duplicate():
 			if !ChartEditor.instance.selection.has(event):
