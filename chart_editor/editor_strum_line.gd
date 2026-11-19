@@ -22,6 +22,8 @@ var muted: bool = false:
 
 var waveform: bool = false
 
+var hitsounds: bool = false
+
 func load_strumline(p_strumline: StrumLine):
 	strumline = p_strumline
 

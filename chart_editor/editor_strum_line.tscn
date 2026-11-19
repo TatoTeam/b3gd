@@ -36,10 +36,23 @@ theme_override_constants/margin_bottom = 4
 layout_mode = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=1012254543]
+[node name="HBoxContainer2" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=466850363]
 layout_mode = 2
 
-[node name="MuteCheckBox" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer" unique_id=1836110026]
+[node name="Waveform" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer2" unique_id=656059674]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+focus_mode = 0
+text = "Waveform"
+
+[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer2/Waveform" unique_id=1502067983 node_paths=PackedStringArray("node")]
+script = ExtResource("4_mbbuy")
+node = NodePath("../../../../../..")
+property_path = "waveform"
+metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
+
+[node name="MuteCheckBox" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer2" unique_id=1836110026]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
@@ -47,23 +60,26 @@ focus_mode = 0
 text = "Mute
 "
 
-[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer/MuteCheckBox" unique_id=1208058604 node_paths=PackedStringArray("node")]
+[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer2/MuteCheckBox" unique_id=1208058604 node_paths=PackedStringArray("node")]
 script = ExtResource("4_mbbuy")
 node = NodePath("../../../../../..")
 property_path = "muted"
 metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
 
-[node name="Waveform" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer" unique_id=244038808]
+[node name="HBoxContainer" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=1012254543]
+layout_mode = 2
+
+[node name="HitsoundsCheckbox" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer" unique_id=1427132731]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 focus_mode = 0
-text = "Waveform"
+text = "Hitsounds"
 
-[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer/Waveform" unique_id=766629096 node_paths=PackedStringArray("node")]
+[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer/HitsoundsCheckbox" unique_id=1807668102 node_paths=PackedStringArray("node")]
 script = ExtResource("4_mbbuy")
 node = NodePath("../../../../../..")
-property_path = "waveform"
+property_path = "hitsounds"
 metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
 
 [node name="CPUCheckBox" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer" unique_id=468590135]

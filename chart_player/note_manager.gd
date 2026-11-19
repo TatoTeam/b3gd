@@ -1,6 +1,8 @@
 extends Node
 class_name NoteManager
 
+static var instance: NoteManager
+
 signal note_press(strum_line_id: int, receptor_id: int, note: Note, hold_delta: float)
 signal note_miss(strum_line_id: int, receptor_id: int, note: Note)
 
@@ -14,6 +16,9 @@ signal note_miss(strum_line_id: int, receptor_id: int, note: Note)
 @export var song_audio_player: AudioStreamPlayer
 
 var strum_lines: Array[StrumLine] = []
+
+func _init():
+	instance = self
 
 func _process(_delta: float) -> void:
 	for strum_line_id in range(strum_lines.size()):

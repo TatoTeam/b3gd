@@ -26,8 +26,10 @@ func _on_class_box_item_selected(index):
 	class_box.select(-1)
 	
 	var event: Event = load(class_box.class_paths[index]).new()
+	event.parent = EventPlayer.instance
 	event.time = event_time
 	event.lane = lane
+	event.init()
 	
 	ChartEditor.instance.chart.events.append(event)
 	ChartEditor.select_only(event)

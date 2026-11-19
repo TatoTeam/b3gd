@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://b8iga0makf0yj" path="res://b3gd/chart_editor/chart_preview.gd" id="13_h2m7h"]
 [ext_resource type="Script" uid="uid://dg70d3jxftqvr" path="res://b3gd/chart_editor/editor_timeline.gd" id="18_bgg50"]
 [ext_resource type="Script" uid="uid://d1cnb4hugwiyp" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_checkbox.gd" id="20_tfe68"]
+[ext_resource type="Script" uid="uid://cgqshpkil63a5" path="res://b3gd/chart_editor/fake_note_manager.gd" id="23_5spb2"]
 
 [sub_resource type="Resource" id="Resource_5aops"]
 script = ExtResource("3_cm7rd")
@@ -163,6 +164,8 @@ atlas = ExtResource("3_cqpfm")
 region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_px4fx"]
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_82mxf"]
 
 [node name="ChartEditor" type="MarginContainer" unique_id=1207813288]
 texture_filter = 1
@@ -625,18 +628,6 @@ node = NodePath("../../../../../../../../..")
 property_path = "settings:editor_zoom"
 metadata/_custom_type_script = "uid://cxtpf0xof2gla"
 
-[node name="HitSoundLabel" type="Label" parent="UIContainer/RightBarScroll/RightBarContainer/EditorOptionsPanel/Margin/VBox/PlaybackFieldContainer" unique_id=1777660297]
-layout_mode = 2
-text = "Hit Sounds:"
-
-[node name="HitSound" type="CheckBox" parent="UIContainer/RightBarScroll/RightBarContainer/EditorOptionsPanel/Margin/VBox/PlaybackFieldContainer" unique_id=876066071]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-focus_mode = 0
-button_pressed = true
-alignment = 1
-
 [node name="MuteInstLabel" type="Label" parent="UIContainer/RightBarScroll/RightBarContainer/EditorOptionsPanel/Margin/VBox/PlaybackFieldContainer" unique_id=793198647]
 layout_mode = 2
 text = "Mute Inst:"
@@ -689,6 +680,13 @@ offset_right = -214.54211
 offset_bottom = 504.0
 mouse_filter = 2
 texture = ExtResource("5_cm7rd")
+
+[node name="FakeNoteManager" type="Node" parent="." unique_id=1148461667 node_paths=PackedStringArray("strum_line_container")]
+script = ExtResource("23_5spb2")
+strum_line_container = NodePath("../UIContainer/WorkAreaScroll/Container/StrumLineContainer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FakeNoteManager" unique_id=1079146878]
+stream = SubResource("AudioStreamPolyphonic_82mxf")
 
 [connection signal="item_selected" from="UIContainer/WorkAreaScroll/Container/TimelineContainer/EventMaker/ClassBox" to="UIContainer/WorkAreaScroll/Container/TimelineContainer/EventMaker" method="_on_class_box_item_selected"]
 [connection signal="value_changed" from="UIContainer/SongScrubber" to="UIContainer/SongScrubber" method="_on_value_changed"]
