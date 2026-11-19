@@ -12,8 +12,10 @@
 [ext_resource type="Script" uid="uid://c2h6ba3oufvlp" path="res://b3gd/chart_editor/class_selector_box.gd" id="5_yrq2n"]
 [ext_resource type="Script" uid="uid://uba06rj25tk5" path="res://b3gd/chart_data/events/event.gd" id="7_b7wb1"]
 [ext_resource type="Script" uid="uid://ceksh73iln201" path="res://b3gd/chart_editor/song_scrubber.gd" id="8_4ei61"]
+[ext_resource type="Shader" uid="uid://bgakq2o5qtva2" path="res://b3gd/chart_editor/dither.gdshader" id="9_0pt3y"]
 [ext_resource type="Script" uid="uid://bw7313hxy48rr" path="res://b3gd/chart_editor/time_format_box.gd" id="9_046nn"]
 [ext_resource type="Script" uid="uid://jjehc0kg4qs7" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_timer.gd" id="9_747oa"]
+[ext_resource type="Script" uid="uid://co88skyab4yqf" path="res://b3gd/chart_editor/waveform.gd" id="9_n0gnj"]
 [ext_resource type="Script" uid="uid://dcs8f3pk45yi2" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_lineedit.gd" id="9_ra5to"]
 [ext_resource type="Script" uid="uid://cxtpf0xof2gla" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_spinbox.gd" id="10_qg7k1"]
 [ext_resource type="Script" uid="uid://b8gjbx3i2jm2l" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_strumline_vertical_placement.gd" id="11_2t1h5"]
@@ -29,6 +31,9 @@
 [sub_resource type="Resource" id="Resource_5aops"]
 script = ExtResource("3_cm7rd")
 metadata/_custom_type_script = "uid://ct2pwsm4nwavc"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n0gnj"]
+shader = ExtResource("9_0pt3y")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qxfdp"]
 atlas = ExtResource("3_cqpfm")
@@ -250,6 +255,13 @@ process_physics_priority = -10
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("18_bgg50")
+
+[node name="Control" type="Control" parent="UIContainer/WorkAreaScroll/Container/TimelineContainer/Timeline" unique_id=818899785]
+material = SubResource("ShaderMaterial_n0gnj")
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_n0gnj")
 
 [node name="StrumLineContainer" type="HBoxContainer" parent="UIContainer/WorkAreaScroll/Container" unique_id=545850274]
 layout_mode = 2
