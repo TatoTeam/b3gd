@@ -1,6 +1,8 @@
 extends Node
 class_name ChartPlayer
 
+static var instance: ChartPlayer
+
 @export var chart: Chart
 
 @onready var ui = $UI
@@ -12,6 +14,9 @@ const CHART_EDITOR_CANVAS := "uid://dk3bhqjhxhv5b"
 
 var editor_canvas = null
 var editor_active = false
+
+func _init() -> void:
+	instance = self
 
 func _input(event: InputEvent) -> void:
 	if not OS.has_feature("editor"):

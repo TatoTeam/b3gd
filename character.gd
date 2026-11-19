@@ -44,12 +44,12 @@ var current_anim = {"type": AnimationType.ANIMATION_NONE, "id": 0}
 var anim_changed = null
 
 func _ready() -> void:
-	var song_audio_player = get_tree().get_first_node_in_group("SongAudioPlayer")
+	var song_audio_player = SongAudioPlayer.instance
 	if song_audio_player == null:
 		return
 	
 	song_audio_player.beat_hit.connect(beat_hit)
-	var note_manager = get_tree().get_first_node_in_group("NoteManager")
+	var note_manager = NoteManager.instance
 	
 	note_manager.note_press.connect(note_press)
 	note_manager.note_miss.connect(note_miss)

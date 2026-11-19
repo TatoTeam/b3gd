@@ -11,9 +11,9 @@ extends MeshInstance3D
 # Callables can't be edited with export. This is a functional modifier system for modcharts though.
 var modifiers: Array[Callable]
 
-@onready var song_audio_player := get_tree().get_first_node_in_group("SongAudioPlayer")
-@onready var note_manager := get_tree().get_first_node_in_group("NoteManager")
-@onready var chart_source := get_tree().get_first_node_in_group("ChartSource")
+@onready var song_audio_player := SongAudioPlayer.instance
+@onready var note_manager := NoteManager.instance
+@onready var chart_source := ChartPlayer.instance
 
 
 var idle_frames: Dictionary[String, float] = {

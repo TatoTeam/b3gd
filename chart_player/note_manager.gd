@@ -1,6 +1,5 @@
 extends Node
 class_name NoteManager
-
 static var instance: NoteManager
 
 signal note_press(strum_line_id: int, receptor_id: int, note: Note, hold_delta: float)

@@ -1,6 +1,6 @@
 extends AudioStreamPlayer
 class_name SongAudioPlayer
-# I just stole this whole script from myself, it might need adjustment - gitgato
+static var instance: SongAudioPlayer
 
 signal beat_hit(beat: int)
 
@@ -91,6 +91,9 @@ func get_beat_from_seconds(seconds: float):
 	last_bpm_index = max(0, last_bpm_index - 1)
 	var bpm_event = bpm_events[last_bpm_index]
 	return get_beat_carry(last_bpm_index) + ((seconds - bpm_event.time) * (bpm_event.bpm / 60))
+
+func _init() -> void:
+	instance = self
 
 func _ready() -> void:
 	add_child(scrub_timer)
