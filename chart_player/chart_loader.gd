@@ -9,7 +9,7 @@ signal events_loaded()
 
 @export_group("Node References")
 @export var chart_player: ChartPlayer
-@export var song_audio_player: AudioStreamPlayer
+@export var song_audio_player: SongAudioPlayer
 @export var note_manager: NoteManager
 @export var event_player: Node
 
@@ -27,6 +27,8 @@ func load_chart():
 var vocal_layers: Array[int] = []
 
 func load_tracks():
+	var old_pos = song_audio_player.song_position_seconds
+	
 	var chart = chart_player.chart
 	var tracks: Array[AudioStream] = [
 		chart.tracks.instrumental, 
@@ -65,6 +67,7 @@ func load_tracks():
 		audio_stream.set_sync_stream(i, tracks[i])
 	
 	song_audio_player.stream = audio_stream
+	song_audio_player.track_seek(old_pos)
 	tracks_loaded.emit()
 
 func load_notes(ignore_past_notes: bool = false):
