@@ -7,6 +7,8 @@ const NOTE_SIZE := 64
 @export var snapping: float = 8.0
 @export var receptor_offset: float = 0.3
 
+@export var note_type_settings: Array[Note] = []
+
 func snap_time(time: float) -> float:
 	if ChartEditor.song_audio_player == null:
 		return time

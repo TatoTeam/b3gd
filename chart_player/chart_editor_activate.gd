@@ -11,6 +11,7 @@ class_name ChartPlayer
 const CHART_EDITOR_CANVAS := "uid://dk3bhqjhxhv5b"
 
 var editor_canvas = null
+var editor_active = false
 
 func _input(event: InputEvent) -> void:
 	if not OS.has_feature("editor"):
@@ -20,16 +21,19 @@ func _input(event: InputEvent) -> void:
 		if editor_canvas == null:
 			add_editor()
 		else:
-			erase_editor()
+			if editor_active:
+				disable_editor()
+			else:
+				enable_editor()
 
-func erase_editor() -> void:
-	editor_canvas.queue_free()
-	editor_canvas = null
+func disable_editor() -> void:
+	editor_active = false
+	editor_canvas.process_mode = Node.PROCESS_MODE_DISABLED
+	editor_canvas.hide()
 	
 	chart_loader.load_tracks()
 	chart_loader.load_notes(true)
 	chart_loader.load_events()
-	
 	
 	note_manager.process_mode = Node.PROCESS_MODE_INHERIT
 	ui.process_mode = Node.PROCESS_MODE_INHERIT
@@ -38,7 +42,19 @@ func erase_editor() -> void:
 	if song_audio_player.paused:
 		song_audio_player.unpause()
 
+
+func enable_editor() -> void:
+	editor_active = true
+	editor_canvas.process_mode = Node.PROCESS_MODE_INHERIT
+	editor_canvas.show()
+	chart_loader.load_chart()
+	note_manager.process_mode = Node.PROCESS_MODE_DISABLED
+	ui.process_mode = Node.PROCESS_MODE_DISABLED
+	ui.visible = false
+
+
 func add_editor() -> void:
+	editor_active = true
 	note_manager.process_mode = Node.PROCESS_MODE_DISABLED
 	chart_loader.load_chart()
 	

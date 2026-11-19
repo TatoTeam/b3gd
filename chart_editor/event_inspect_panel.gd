@@ -187,9 +187,14 @@ func _on_paste_button_pressed() -> void:
 	if timeline_point is Note:
 		clipboard_object.length = timeline_point.length
 	
+	ChartEditor.undo_redo.create_action("Paste Properties")
 	for property in timeline_point.get_property_list():
 		if !(property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE): 
 			continue
 		if !(property.usage & PROPERTY_USAGE_EDITOR): 
 			continue
 		timeline_point.set(property.name, clipboard_object.get(property.name))
+		
+		ChartEditor.undo_redo.add_do_property(timeline_point, property.name, clipboard_object.get(property.name))
+		ChartEditor.undo_redo.add_undo_property(timeline_point, property.name, timeline_point.get(property.name))
+	ChartEditor.undo_redo.commit_action()

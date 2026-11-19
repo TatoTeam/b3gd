@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://c5o07kfk6h6ox" path="res://b3gd/chart_editor/editor_field_container.gd" id="20_1yhdw"]
 [ext_resource type="Script" uid="uid://b76ir6ro7hxf0" path="res://b3gd/chart_data/notes/note.gd" id="20_sjv8v"]
 [ext_resource type="Script" uid="uid://d1cnb4hugwiyp" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_checkbox.gd" id="20_tfe68"]
+[ext_resource type="Script" uid="uid://268y2nl6mtvo" path="res://b3gd/chart_editor/clipboard_buttons.gd" id="21_laud3"]
 [ext_resource type="Script" uid="uid://cgqshpkil63a5" path="res://b3gd/chart_editor/fake_note_manager.gd" id="23_5spb2"]
 
 [sub_resource type="Resource" id="Resource_5aops"]
@@ -166,6 +167,14 @@ events = [SubResource("InputEventKey_cle1c"), SubResource("InputEventKey_yecj3")
 [sub_resource type="AtlasTexture" id="AtlasTexture_xba6y"]
 atlas = ExtResource("3_cqpfm")
 region = Rect2(1, 71, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lyhl"]
+atlas = ExtResource("3_cqpfm")
+region = Rect2(33, 32, 14, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8v0hc"]
+atlas = ExtResource("3_cqpfm")
+region = Rect2(16, 32, 14, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oxk88"]
 atlas = ExtResource("3_cqpfm")
@@ -481,6 +490,43 @@ shortcut = SubResource("Shortcut_kkbay")
 text = "Redo"
 icon = SubResource("AtlasTexture_xba6y")
 
+[node name="ClipboardGroupLabel" type="Label" parent="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox" unique_id=1999585215]
+layout_mode = 2
+text = "Clipboard"
+label_settings = SubResource("LabelSettings_piitt")
+horizontal_alignment = 1
+
+[node name="ClipboardButtons" type="HBoxContainer" parent="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox" unique_id=308530264]
+layout_mode = 2
+alignment = 1
+script = ExtResource("21_laud3")
+
+[node name="CopyButton" type="Button" parent="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox/ClipboardButtons" unique_id=1156603026]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_mode = 0
+disabled = true
+shortcut = SubResource("Shortcut_kkbay")
+text = "Copy"
+icon = SubResource("AtlasTexture_8lyhl")
+
+[node name="PasteButton" type="Button" parent="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox/ClipboardButtons" unique_id=758960681]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+focus_mode = 0
+disabled = true
+shortcut = SubResource("Shortcut_kkbay")
+text = "Paste"
+icon = SubResource("AtlasTexture_8v0hc")
+
+[node name="MetadataGroupLabel" type="Label" parent="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox" unique_id=1193238609]
+layout_mode = 2
+text = "Metadata"
+label_settings = SubResource("LabelSettings_piitt")
+horizontal_alignment = 1
+
 [node name="HBoxContainer" type="GridContainer" parent="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox" unique_id=777782342]
 layout_mode = 2
 columns = 2
@@ -722,4 +768,6 @@ stream = SubResource("AudioStreamPolyphonic_82mxf")
 [connection signal="pressed" from="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox/FileButtons/SaveAsButton" to="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox/FileButtons" method="_on_save_as_button_pressed"]
 [connection signal="pressed" from="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox/FileButtons/UndoButton" to="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox/FileButtons" method="_on_undo_button_pressed"]
 [connection signal="pressed" from="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox/FileButtons/RedoButton" to="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox/FileButtons" method="_on_redo_button_pressed"]
+[connection signal="pressed" from="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox/ClipboardButtons/CopyButton" to="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox/ClipboardButtons" method="_on_copy_button_pressed"]
+[connection signal="pressed" from="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox/ClipboardButtons/PasteButton" to="UIContainer/RightBarScroll/RightBarContainer/ChartInfoPanel/Margin/VBox/ClipboardButtons" method="_on_paste_button_pressed"]
 [connection signal="item_selected" from="UIContainer/RightBarScroll/RightBarContainer/EditorOptionsPanel/Margin/VBox/EditorFieldContainer/NoteClass" to="UIContainer/RightBarScroll/RightBarContainer/EditorOptionsPanel/Margin/VBox/EditorFieldContainer" method="_on_note_class_item_selected"]
