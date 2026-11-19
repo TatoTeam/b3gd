@@ -47,7 +47,9 @@ static var QUANT_COLORS: Array[Color] = [
 ]
 
 static func get_quant_id(note_time: float) -> int:
-	var note_beat = ChartEditor.song_audio_player.get_beat_from_seconds(note_time)
+	return get_quant_id_from_beat(ChartEditor.song_audio_player.get_beat_from_seconds(note_time))
+
+static func get_quant_id_from_beat(note_beat: float) -> int:
 	var note_beat_sm: int = round(note_beat * 48.0)
 	for i in QUANT_LIST.size():
 		if note_beat_sm % (192 / QUANT_LIST[i]) == 0:
@@ -55,12 +57,10 @@ static func get_quant_id(note_time: float) -> int:
 	return 8
 
 static func get_quant_color(note_time: float) -> Color:
-	var note_beat = ChartEditor.song_audio_player.get_beat_from_seconds(note_time)
-	var note_beat_sm: int = round(note_beat * 48.0)
-	for i in QUANT_LIST.size():
-		if note_beat_sm % (192 / QUANT_LIST[i]) == 0:
-			return QUANT_COLORS[i]
-	return QUANT_COLORS[8]
+	return QUANT_COLORS[get_quant_id(note_time)]
+
+static func get_quant_color_from_beat(note_beat: float) -> Color:
+	return QUANT_COLORS[get_quant_id_from_beat(note_beat)]
 
 static func select_only(selectable: TimelinePoint):
 	undo_redo.create_action("Select Selectable Only")

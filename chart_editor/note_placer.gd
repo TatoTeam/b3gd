@@ -1,6 +1,6 @@
 extends ColorRect
 
-@onready var strumline_object: EditorStrumLine = $".."
+@onready var strumline_object: EditorStrumLine = get_parent()
 
 var preview: EditorNote
 

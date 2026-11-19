@@ -6,7 +6,6 @@ extends OptionButton
 
 var class_paths = []
 
-
 func _ready() -> void:
 	for global_class in ProjectSettings.get_global_class_list():
 		if not ResourceLoader.exists(global_class.path):

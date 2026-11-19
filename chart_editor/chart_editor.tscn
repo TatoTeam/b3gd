@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://jjehc0kg4qs7" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_timer.gd" id="9_747oa"]
 [ext_resource type="Script" uid="uid://co88skyab4yqf" path="res://b3gd/chart_editor/waveform.gd" id="9_n0gnj"]
 [ext_resource type="Script" uid="uid://dcs8f3pk45yi2" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_lineedit.gd" id="9_ra5to"]
+[ext_resource type="Script" uid="uid://cghht07ludlhc" path="res://b3gd/chart_editor/grid_lines.gd" id="10_7xm88"]
 [ext_resource type="Script" uid="uid://cxtpf0xof2gla" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_spinbox.gd" id="10_qg7k1"]
 [ext_resource type="Script" uid="uid://b8gjbx3i2jm2l" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_strumline_vertical_placement.gd" id="11_2t1h5"]
 [ext_resource type="Script" uid="uid://xaasgffpm80p" path="res://b3gd/chart_editor/file_buttons.gd" id="11_u13mf"]
@@ -256,7 +257,15 @@ anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("18_bgg50")
 
-[node name="Control" type="Control" parent="UIContainer/WorkAreaScroll/Container/TimelineContainer/Timeline" unique_id=818899785]
+[node name="GridLines" type="Control" parent="UIContainer/WorkAreaScroll/Container/TimelineContainer/Timeline" unique_id=1561942482]
+z_index = -1
+anchors_preset = 0
+offset_left = -4.0
+offset_right = 36.0
+offset_bottom = 40.0
+script = ExtResource("10_7xm88")
+
+[node name="Waveforms" type="Control" parent="UIContainer/WorkAreaScroll/Container/TimelineContainer/Timeline" unique_id=818899785]
 material = SubResource("ShaderMaterial_n0gnj")
 anchors_preset = 0
 offset_right = 40.0

@@ -3,8 +3,13 @@
 [ext_resource type="Script" uid="uid://dp3c6qf8p0ime" path="res://b3gd/chart_editor/editor_strum_line.gd" id="1_6wfxj"]
 [ext_resource type="Script" uid="uid://bdttvldel5y85" path="res://b3gd/chart_editor/receptor_control.gd" id="2_cq5xl"]
 [ext_resource type="Texture2D" uid="uid://hwm18sid4ysu" path="res://b3gd/chart_editor/ui/atlas.png" id="3_t2trj"]
+[ext_resource type="Script" uid="uid://d3f630mbedmu1" path="res://b3gd/chart_editor/property_getter_setter_menu_box.gd" id="4_6wfxj"]
 [ext_resource type="Script" uid="uid://d1cnb4hugwiyp" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_checkbox.gd" id="4_mbbuy"]
 [ext_resource type="Script" uid="uid://d0j3bn53ed8sw" path="res://b3gd/chart_editor/note_placer.gd" id="6_mcovw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfqny"]
+atlas = ExtResource("3_t2trj")
+region = Rect2(32, 79, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u30xk"]
 atlas = ExtResource("3_t2trj")
@@ -36,69 +41,46 @@ theme_override_constants/margin_bottom = 4
 layout_mode = 2
 alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=466850363]
-layout_mode = 2
-
-[node name="Waveform" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer2" unique_id=656059674]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-focus_mode = 0
-text = "Waveform"
-
-[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer2/Waveform" unique_id=1502067983 node_paths=PackedStringArray("node")]
-script = ExtResource("4_mbbuy")
-node = NodePath("../../../../../..")
-property_path = "waveform"
-metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
-
-[node name="MuteCheckBox" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer2" unique_id=1836110026]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-focus_mode = 0
-text = "Mute
-"
-
-[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer2/MuteCheckBox" unique_id=1208058604 node_paths=PackedStringArray("node")]
-script = ExtResource("4_mbbuy")
-node = NodePath("../../../../../..")
-property_path = "muted"
-metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=1012254543]
-layout_mode = 2
-
-[node name="HitsoundsCheckbox" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer" unique_id=1427132731]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-focus_mode = 0
-text = "Hitsounds"
-
-[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer/HitsoundsCheckbox" unique_id=1807668102 node_paths=PackedStringArray("node")]
-script = ExtResource("4_mbbuy")
-node = NodePath("../../../../../..")
-property_path = "hitsounds"
-metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
-
-[node name="CPUCheckBox" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer" unique_id=468590135]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-focus_mode = 0
-text = "CPU"
-
-[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer/CPUCheckBox" unique_id=572545642 node_paths=PackedStringArray("node")]
-script = ExtResource("4_mbbuy")
-node = NodePath("../../../../../..")
-property_path = "strumline:cpu"
-metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
-
 [node name="ReceptorControl" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=1483075279 node_paths=PackedStringArray("editor_strumline")]
 layout_mode = 2
 script = ExtResource("2_cq5xl")
 editor_strumline = NodePath("../../../..")
+
+[node name="MenuButton" type="MenuButton" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=62408520]
+layout_mode = 2
+icon = SubResource("AtlasTexture_vfqny")
+flat = false
+item_count = 3
+popup/item_0/text = "Waveform"
+popup/item_0/checkable = 1
+popup/item_0/checked = true
+popup/item_0/id = 0
+popup/item_1/text = "Mute"
+popup/item_1/checkable = 1
+popup/item_1/id = 1
+popup/item_2/text = "Hit Sounds"
+popup/item_2/checkable = 1
+popup/item_2/id = 2
+
+[node name="PropertyGetterSetterWaveform" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl/MenuButton" unique_id=810691651 node_paths=PackedStringArray("node")]
+script = ExtResource("4_6wfxj")
+node = NodePath("../../../../../..")
+property_path = "waveform"
+metadata/_custom_type_script = "uid://db4chh8t0wooi"
+
+[node name="PropertyGetterSetterMute" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl/MenuButton" unique_id=24922110 node_paths=PackedStringArray("node")]
+script = ExtResource("4_6wfxj")
+id = 1
+node = NodePath("../../../../../..")
+property_path = "muted"
+metadata/_custom_type_script = "uid://db4chh8t0wooi"
+
+[node name="PropertyGetterSetterHitsounds" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl/MenuButton" unique_id=862220803 node_paths=PackedStringArray("node")]
+script = ExtResource("4_6wfxj")
+id = 2
+node = NodePath("../../../../../..")
+property_path = "hitsounds"
+metadata/_custom_type_script = "uid://db4chh8t0wooi"
 
 [node name="Label" type="Label" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=549249472]
 layout_mode = 2
@@ -124,6 +106,22 @@ layout_mode = 2
 focus_mode = 0
 icon = SubResource("AtlasTexture_wb80q")
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=466850363]
+layout_mode = 2
+
+[node name="MuteCheckBox" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer2" unique_id=1836110026]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+focus_mode = 0
+text = "CPU"
+
+[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer2/MuteCheckBox" unique_id=572545642 node_paths=PackedStringArray("node")]
+script = ExtResource("4_mbbuy")
+node = NodePath("../../../../../..")
+property_path = "strumline:cpu"
+metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
+
 [node name="NotePlacer" type="ColorRect" parent="." unique_id=892793543]
 z_index = -1
 texture_repeat = 2
@@ -131,8 +129,22 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
-color = Color(0.288518, 0.28851798, 0.28851798, 0.3764706)
+color = Color(0.2901961, 0.2901961, 0.2901961, 0)
 script = ExtResource("6_mcovw")
+
+[node name="NotePlacer2" type="ColorRect" parent="NotePlacer" unique_id=434634575]
+z_index = -2
+texture_repeat = 2
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+color = Color(0.288518, 0.28851798, 0.28851798, 0.3764706)
 
 [connection signal="pressed" from="InfoPanel/InfoMargin/InfoVBox/ReceptorControl/RemoveReceptor" to="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" method="_on_remove_receptor_pressed"]
 [connection signal="pressed" from="InfoPanel/InfoMargin/InfoVBox/ReceptorControl/AddReceptor" to="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" method="_on_add_receptor_pressed"]
