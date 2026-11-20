@@ -38,5 +38,5 @@ func _on_class_box_item_selected(index):
 	event.lane = lane
 	event.init()
 	
-	ChartEditor.instance.chart.events.append(event)
+	ChartEditor.instance.add_event(event)
 	ChartEditor.select_only(event)

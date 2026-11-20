@@ -60,11 +60,13 @@ func remove_note(receptor: int, time: float, create_new_action: bool = true):
 			
 			ChartEditor.undo_redo.add_do_method(func():
 				notes.erase(note)
+				ChartEditor.instance.chart.sort_notes()
 				ChartLoader.instance.load_notes()
 			)
 			
 			ChartEditor.undo_redo.add_undo_method(func():
 				notes.append(note)
+				ChartEditor.instance.chart.sort_notes()
 				ChartLoader.instance.load_notes()
 			)
 			
@@ -99,10 +101,12 @@ func add_note():
 	ChartEditor.undo_redo.add_do_reference(new_note)
 	ChartEditor.undo_redo.add_do_method(func():
 		receptor.notes.append(new_note)
+		ChartEditor.instance.chart.sort_notes()
 		ChartLoader.instance.load_notes()
 	)
 	ChartEditor.undo_redo.add_undo_method(func():
 		receptor.notes.erase(new_note)
+		ChartEditor.instance.chart.sort_notes()
 		ChartLoader.instance.load_notes()
 	)
 	ChartEditor.undo_redo.commit_action()

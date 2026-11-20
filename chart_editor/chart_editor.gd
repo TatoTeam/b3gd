@@ -174,13 +174,34 @@ func remove_event(event: Event):
 	ChartEditor.undo_redo.add_do_method(func():
 		ChartEditor.remove_from_selection(event)
 		ChartEditor.instance.chart.events.erase(event)
+		ChartEditor.instance.chart.sort_events()
 	)
 	
 	ChartEditor.undo_redo.add_undo_method(func():
 		ChartEditor.instance.chart.events.append(event)
+		ChartEditor.instance.chart.sort_events()
 	)
 	
 	ChartEditor.undo_redo.commit_action()
+
+func add_event(event: Event):
+	ChartEditor.undo_redo.create_action("Add Event")
+	
+	ChartEditor.undo_redo.add_do_reference(event)
+	
+	ChartEditor.undo_redo.add_do_method(func():
+		ChartEditor.remove_from_selection(event)
+		ChartEditor.instance.chart.events.append(event)
+		ChartEditor.instance.chart.sort_events()
+	)
+	
+	ChartEditor.undo_redo.add_undo_method(func():
+		ChartEditor.instance.chart.events.erase(event)
+		ChartEditor.instance.chart.sort_events()
+	)
+	
+	ChartEditor.undo_redo.commit_action()
+
 
 func _init():
 	instance = self
