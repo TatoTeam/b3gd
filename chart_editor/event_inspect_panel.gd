@@ -71,10 +71,11 @@ func _load_event(p_timeline_point: TimelinePoint):
 
 func _add_field(label_text: String, property_path: String, type: int, hint: int = PROPERTY_HINT_NONE, hint_string: String = ""):
 	var row = HBoxContainer.new()
-	var label = Label.new()
-	label.text = label_text + ":"
-	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_child(label)
+	if label_text != "":
+		var label = Label.new()
+		label.text = label_text + ":"
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.add_child(label)
 	
 	var input: Control
 	var binding: PropertyGetterSetter
@@ -118,22 +119,25 @@ func _add_field(label_text: String, property_path: String, type: int, hint: int 
 					if spinbox.step == 0.0:
 						spinbox.custom_arrow_step = 1.0 if type == TYPE_INT else 0.001
 		TYPE_VECTOR2:
-			_add_field(label_text + " X", property_path + ":x", TYPE_FLOAT, hint, hint_string)
-			_add_field(label_text + " Y", property_path + ":y", TYPE_FLOAT, hint, hint_string)
-			row.free()
 			return
+			#_add_field("", property_path + ":x", TYPE_FLOAT, hint, hint_string)
+			#_add_field("", property_path + ":y", TYPE_FLOAT, hint, hint_string)
+			#row.free()
 		_:
 			input = LineEdit.new()
 			binding = PropertyGetterSetterLineEdit.new()
 			binding.variant_value = type != TYPE_STRING
 	
-	input.custom_minimum_size.x = 120
-	binding.node = self
-	binding.resource = timeline_point
-	binding.property_path = property_path
-	input.add_child(binding)
-	binding.set_incoming_value(timeline_point.get_indexed(property_path))
-	row.add_child(input)
+	if binding != null:
+		binding.node = self
+		binding.resource = timeline_point
+		binding.property_path = property_path
+		binding.set_incoming_value(timeline_point.get_indexed(property_path))
+	if input != null:
+		input.custom_minimum_size.x = 120
+		if binding != null:
+			input.add_child(binding)
+		row.add_child(input)
 	field_container.add_child(row)
 
 func _on_close_button_pressed() -> void:

@@ -184,6 +184,7 @@ region = Rect2(0, 48, 16, 16)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_px4fx"]
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_82mxf"]
+polyphony = 2
 
 [node name="ChartEditor" type="MarginContainer" unique_id=1207813288]
 texture_filter = 1
@@ -795,6 +796,7 @@ strum_line_container = NodePath("../UIContainer/WorkAreaScroll/Container/StrumLi
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FakeNoteManager" unique_id=1079146878]
 stream = SubResource("AudioStreamPolyphonic_82mxf")
+volume_db = -4.0
 
 [connection signal="item_selected" from="UIContainer/WorkAreaScroll/Container/TimelineContainer/EventMaker/ClassBox" to="UIContainer/WorkAreaScroll/Container/TimelineContainer/EventMaker" method="_on_class_box_item_selected"]
 [connection signal="value_changed" from="UIContainer/SongScrubber" to="UIContainer/SongScrubber" method="_on_value_changed"]
