@@ -1,7 +1,18 @@
 @icon("uid://drbn861q6bcpl")
 class_name EventCameraZoom extends EventTween
 
-@export var target_zoom: Vector2 = Vector2.ONE
+@export var target_zoom: float = 1.0:
+	set(value):
+		target_zoom = value
+		target_zoom_final = target_zoom * target_zoom_mult
+
+@export var target_zoom_mult: Vector2 = Vector2.ONE:
+	set(value):
+		target_zoom_mult = value
+		target_zoom_final = target_zoom * target_zoom_mult
+
+var target_zoom_final: Vector2 = Vector2.ONE
+
 @export var multiplicative: bool = false:
 	set(value):
 		multiplicative = value
@@ -20,6 +31,7 @@ func init():
 	to_tween.property = "zoom"
 	
 	to_tween.value_node = self
-	to_tween.value_property = "target_zoom"
+	to_tween.value_property = "target_zoom_final"
 	
 	multiply = multiplicative
+	target_zoom_final = target_zoom * target_zoom_mult

@@ -184,6 +184,7 @@ region = Rect2(0, 48, 16, 16)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_px4fx"]
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_82mxf"]
+polyphony = 2
 
 [node name="ChartEditor" type="MarginContainer" unique_id=1207813288]
 texture_filter = 1
