@@ -12,6 +12,7 @@ static var song_audio_player: SongAudioPlayer:
 
 static var selection: Array[TimelinePoint] = []
 static var clipboard: Array[TimelinePoint] = []
+static var clipboard_note_info: Dictionary[Note,Receptor] = {}
 
 static var current_note_type: String
 
@@ -117,9 +118,10 @@ static func select_only(selectable: TimelinePoint):
 	
 	undo_redo.commit_action()
 
-static func add_to_selection(selectable: TimelinePoint):
+static func add_to_selection(selectable: TimelinePoint, create_action: bool = true):
 	if selection.has(selectable): return
-	undo_redo.create_action("Select Selectable")
+	if create_action:
+		undo_redo.create_action("Select Selectable")
 	
 	undo_redo.add_do_method(func():
 		selection.append(selectable)
@@ -131,7 +133,8 @@ static func add_to_selection(selectable: TimelinePoint):
 		if instance: instance.selection_updated.emit()
 	)
 	
-	undo_redo.commit_action()
+	if create_action:
+		undo_redo.commit_action()
 
 static func remove_from_selection(selectable: TimelinePoint):
 	if !selection.has(selectable): return
@@ -149,8 +152,9 @@ static func remove_from_selection(selectable: TimelinePoint):
 	
 	undo_redo.commit_action()
 
-static func clear_selection():
-	undo_redo.create_action("Select Selectable Only")
+static func clear_selection(create_action: bool = true):
+	if create_action:
+		undo_redo.create_action("Select Selectable Only")
 	
 	var old_selection_array := selection.duplicate()
 	
@@ -164,7 +168,8 @@ static func clear_selection():
 		if instance: instance.selection_updated.emit()
 	)
 	
-	undo_redo.commit_action()
+	if create_action:
+		undo_redo.commit_action()
 
 func remove_event(event: Event):
 	ChartEditor.undo_redo.create_action("Remove Event")
@@ -201,7 +206,6 @@ func add_event(event: Event):
 	)
 	
 	ChartEditor.undo_redo.commit_action()
-
 
 func _init():
 	instance = self

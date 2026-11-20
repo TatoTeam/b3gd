@@ -6,8 +6,6 @@ class_name EventCameraMovement extends EventTween
 		target_idx = value
 		if parent != null:
 			init()
-		else:
-			print("parent is null bro")
 
 static var position_tween: Tween
 
