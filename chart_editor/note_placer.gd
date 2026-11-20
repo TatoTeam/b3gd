@@ -79,6 +79,11 @@ func add_note():
 	if note_dir > strumline_object.strumline.receptors.size() - 1 or note_dir < 0: 
 		return
 	
+	if note_length < 0:
+		var old_note_time = note_time
+		note_time = old_note_time + note_length
+		note_length = old_note_time - preview.note.time
+	
 	ChartEditor.undo_redo.create_action("Place Note")
 	ChartEditor.clear_selection()
 	
@@ -127,7 +132,8 @@ func _process(_delta):
 		note_time = timeline.y_to_snapped_time(timeline_mouse.y)
 		note_length = 0.0
 	else:
-		note_length = maxf(ChartEditor.instance.settings.snap_time(maxf(mouse_time - note_time, 0.0)), 0.0)
+		var mouse_snapped = ChartEditor.instance.settings.snap_time(mouse_time)
+		note_length = mouse_snapped - note_time
 	
 	_update_preview()
 
@@ -153,11 +159,17 @@ func _update_preview() -> void:
 		return
 
 	var timeline := ChartEditor.instance.timeline
-	preview.note.time = note_time
-	preview.note.length = note_length
+	if note_length >= 0:
+		preview.note.time = note_time
+		preview.note.length = note_length
+	else:
+		preview.note.time = note_time + note_length
+		preview.note.length = note_time - preview.note.time
 	preview.direction = note_dir
-
-	preview.position = Vector2(timeline.global_to_timeline(global_position).x + note_dir * ChartEditor.instance.settings.NOTE_SIZE, note_time * timeline.pixels_per_second)
+	
+	var preview_position = Vector2(timeline.global_to_timeline(global_position).x + note_dir * ChartEditor.instance.settings.NOTE_SIZE, preview.note.time * timeline.pixels_per_second)
+	
+	preview.position = preview_position
 	preview.head.scale.y = min(1.0, ChartEditor.instance.settings.editor_zoom)
 	preview.head.position.y = -(preview.head.size.y * preview.head.scale.y * 0.5)
 	

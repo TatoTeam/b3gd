@@ -735,10 +735,12 @@ property_path = "inst_muted"
 metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
 
 [node name="MuteInstLabel2" type="Label" parent="UIContainer/RightBarScroll/RightBarContainer/EditorOptionsPanel/Margin/VBox/PlaybackFieldContainer" unique_id=1847968644]
+visible = false
 layout_mode = 2
 text = "Vortex Input:"
 
 [node name="VortexInput" type="CheckBox" parent="UIContainer/RightBarScroll/RightBarContainer/EditorOptionsPanel/Margin/VBox/PlaybackFieldContainer" unique_id=2002143593]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
