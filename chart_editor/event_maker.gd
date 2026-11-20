@@ -36,7 +36,13 @@ func _on_class_box_item_selected(index):
 	event.parent = EventPlayer.instance
 	event.time = event_time
 	event.lane = lane
-	event.init()
 	
 	ChartEditor.instance.add_event(event)
+	event.init()
+	
+	# fix race condition with selection
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
 	ChartEditor.select_only(event)
