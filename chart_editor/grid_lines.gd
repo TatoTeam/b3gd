@@ -23,8 +23,10 @@ func _draw() -> void:
 		var snap_time = ChartEditor.song_audio_player.get_seconds_from_beat(ChartEditor.instance.settings.snap_beat(time_start) + snap) - grid_line
 		while grid_line < time_end:
 			var line = get_parent().time_to_y(grid_line)
-			
-			draw_line(Vector2(area.global_position.x, line), Vector2(area.global_position.x + area.size.x, line), Color(ChartEditor.get_quant_color(grid_line), 0.25), 4)
+			var color = ChartEditor.get_quant_color(grid_line)
+			color.s *= 0.8
+			color.v += 0.5
+			draw_line(Vector2(area.global_position.x, line), Vector2(area.global_position.x + area.size.x, line), Color(color, 0.25), 4)
 			grid_line = ChartEditor.instance.settings.snap_time(grid_line)
 			var grid_line_beat = ChartEditor.song_audio_player.get_beat_from_seconds(grid_line)
 			snap_time = ChartEditor.song_audio_player.get_seconds_from_beat(ChartEditor.instance.settings.snap_beat(grid_line_beat) + snap) - grid_line

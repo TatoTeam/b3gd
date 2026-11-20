@@ -9,7 +9,12 @@ var timeline_point_source: Array
 var timeline_point: TimelinePoint
 
 func _process(_delta: float) -> void:
-	var clipboard_object = str_to_var(DisplayServer.clipboard_get())
+	if ChartEditor.clipboard.size() == 0:
+		if !paste_button.disabled:
+			paste_button.disabled = true
+		return
+	
+	var clipboard_object = ChartEditor.clipboard[0]
 	
 	if !clipboard_object is TimelinePoint:
 		if !paste_button.disabled:
@@ -165,18 +170,25 @@ func _on_close_button_pressed() -> void:
 	ChartEditor.undo_redo.commit_action()
 
 func _on_copy_button_pressed() -> void:
-	var copied_data = timeline_point.duplicate_deep(Resource.DEEP_DUPLICATE_INTERNAL)
-	if copied_data is Event:
-		copied_data.parent = null
-	DisplayServer.clipboard_set(var_to_str(copied_data))
+	ChartEditor.clipboard = [timeline_point]
+	ChartEditor.clipboard_note_info.clear()
+	
+	if timeline_point is not Note:
+		return
+	
+	for strum_line in ChartEditor.instance.chart.strum_lines:
+		for receptor in strum_line.receptors:
+			if receptor.notes.find(timeline_point) != -1:
+				ChartEditor.clipboard_note_info.set(timeline_point, receptor)
+				break
 
 func _on_paste_button_pressed() -> void:
-	var clipboard_object = str_to_var(DisplayServer.clipboard_get())
-	
-	if !clipboard_object is TimelinePoint:
+	if ChartEditor.clipboard.size() == 0:
 		if !paste_button.disabled:
 			paste_button.disabled = true
 		return
+	
+	var clipboard_object = ChartEditor.clipboard[0].duplicate()
 	
 	if clipboard_object.get_script().get_global_name() != timeline_point.get_script().get_global_name():
 		return
