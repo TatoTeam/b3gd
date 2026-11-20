@@ -62,6 +62,41 @@ static func get_quant_color(note_time: float) -> Color:
 static func get_quant_color_from_beat(note_beat: float) -> Color:
 	return QUANT_COLORS[get_quant_id_from_beat(note_beat)]
 
+static func add_new_selection(selectables: Array[TimelinePoint]):
+	undo_redo.create_action("Add New Selection")
+	
+	undo_redo.add_do_method(func():
+		selection.append_array(selectables)
+		if instance: instance.selection_updated.emit()
+	)
+	
+	undo_redo.add_undo_method(func():
+		for selectable in selectables:
+			selection.erase(selectable)
+		
+		if instance: instance.selection_updated.emit()
+	)
+	
+	undo_redo.commit_action()
+
+static func set_new_selection(selectables: Array[TimelinePoint]):
+	undo_redo.create_action("Set New Selection")
+	
+	var old_selection_array := selection.duplicate()
+	
+	undo_redo.add_do_method(func():
+		selection.clear()
+		selection.append_array(selectables)
+		if instance: instance.selection_updated.emit()
+	)
+	
+	undo_redo.add_undo_method(func():
+		selection = old_selection_array.duplicate()
+		if instance: instance.selection_updated.emit()
+	)
+	
+	undo_redo.commit_action()
+
 static func select_only(selectable: TimelinePoint):
 	undo_redo.create_action("Select Selectable Only")
 	
@@ -156,5 +191,5 @@ func _ready():
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		if event.pressed && event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
+		if event.pressed && event.button_index == MouseButton.MOUSE_BUTTON_LEFT && !Input.is_key_pressed(KEY_SHIFT):
 			clear_selection()

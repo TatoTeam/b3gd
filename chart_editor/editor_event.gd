@@ -19,7 +19,7 @@ func _ready() -> void:
 func update_visuals(icon: Texture2D) -> void:
 	if button.icon != icon:
 		button.icon = icon
-
+	
 	arrow.offset_right = 39.0 + event.lane * LANE_WIDTH
 
 func _on_button_toggled(toggled_on):

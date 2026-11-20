@@ -7,6 +7,13 @@ var lane: int = 0
 
 func _process(_delta):
 	if ChartEditor.song_audio_player == null: return
+	
+	if Input.is_key_pressed(KEY_SHIFT):
+		visible = false
+		return
+	else:
+		visible = true
+	
 	var timeline := ChartEditor.instance.timeline
 
 	if !class_box.button_pressed:

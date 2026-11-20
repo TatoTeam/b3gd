@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://b8gjbx3i2jm2l" path="res://b3gd/chart_editor/setter_getters/property_getter_setter_strumline_vertical_placement.gd" id="11_2t1h5"]
 [ext_resource type="Script" uid="uid://xaasgffpm80p" path="res://b3gd/chart_editor/file_buttons.gd" id="11_u13mf"]
 [ext_resource type="Script" uid="uid://8qdewobvxyvx" path="res://b3gd/chart_editor/right_bar_scroll.gd" id="12_60gf8"]
+[ext_resource type="Script" uid="uid://cwfpbw0ruhhn1" path="res://b3gd/chart_editor/selection_box.gd" id="13_8lyhl"]
 [ext_resource type="Script" uid="uid://b8iga0makf0yj" path="res://b3gd/chart_editor/chart_preview.gd" id="13_h2m7h"]
 [ext_resource type="Script" uid="uid://dg70d3jxftqvr" path="res://b3gd/chart_editor/editor_timeline.gd" id="18_bgg50"]
 [ext_resource type="Script" uid="uid://c5o07kfk6h6ox" path="res://b3gd/chart_editor/editor_field_container.gd" id="20_1yhdw"]
@@ -279,6 +280,22 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_n0gnj")
+
+[node name="SelectionBox" type="NinePatchRect" parent="UIContainer/WorkAreaScroll/Container/TimelineContainer/Timeline" unique_id=1081155754]
+layout_mode = 1
+offset_left = -222.0
+offset_top = 487.0
+offset_right = 187.0
+offset_bottom = 830.0
+texture = ExtResource("3_cqpfm")
+region_rect = Rect2(97, 17, 14, 14)
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource("13_8lyhl")
 
 [node name="StrumLineContainer" type="HBoxContainer" parent="UIContainer/WorkAreaScroll/Container" unique_id=545850274]
 layout_mode = 2

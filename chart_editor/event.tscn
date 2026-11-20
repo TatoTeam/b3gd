@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bt0p345u448ww" path="res://b3gd/chart_editor/event_unknown.png" id="3_nrajs"]
 [ext_resource type="Texture2D" uid="uid://cka5y22a126yx" path="res://b3gd/chart_editor/ui/event_line.png" id="3_ylqe5"]
 
-[node name="Event" type="Control" unique_id=500456082]
+[node name="Event" type="Control" unique_id=500456082 groups=["Selectable"]]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_xdln7")
