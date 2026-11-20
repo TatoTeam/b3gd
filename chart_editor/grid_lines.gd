@@ -5,7 +5,7 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	position.y = -get_parent().position.y
-	draw_set_transform(Vector2(0, get_parent().position.y))
+	draw_set_transform(Vector2(-get_parent().global_position.x, get_parent().position.y))
 	
 	var position_start = -get_parent().position.y
 	var position_end = -get_parent().position.y + get_parent().get_parent().size.y

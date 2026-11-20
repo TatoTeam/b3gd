@@ -269,8 +269,7 @@ script = ExtResource("18_bgg50")
 [node name="GridLines" type="Control" parent="UIContainer/WorkAreaScroll/Container/TimelineContainer/Timeline" unique_id=1561942482]
 z_index = -1
 anchors_preset = 0
-offset_left = -4.0
-offset_right = 36.0
+offset_right = 8000.0
 offset_bottom = 40.0
 script = ExtResource("10_7xm88")
 

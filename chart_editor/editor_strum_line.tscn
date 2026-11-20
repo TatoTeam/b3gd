@@ -37,16 +37,11 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="InfoVBox" type="VBoxContainer" parent="InfoPanel/InfoMargin" unique_id=1542519302]
+[node name="InfoVBox" type="HFlowContainer" parent="InfoPanel/InfoMargin" unique_id=1315320338]
 layout_mode = 2
 alignment = 1
 
-[node name="ReceptorControl" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=1483075279 node_paths=PackedStringArray("editor_strumline")]
-layout_mode = 2
-script = ExtResource("2_cq5xl")
-editor_strumline = NodePath("../../../..")
-
-[node name="MenuButton" type="MenuButton" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=62408520]
+[node name="MenuButton" type="MenuButton" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=62408520]
 layout_mode = 2
 icon = SubResource("AtlasTexture_vfqny")
 flat = false
@@ -62,29 +57,37 @@ popup/item_2/text = "Hit Sounds"
 popup/item_2/checkable = 1
 popup/item_2/id = 2
 
-[node name="PropertyGetterSetterWaveform" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl/MenuButton" unique_id=810691651 node_paths=PackedStringArray("node")]
+[node name="PropertyGetterSetterWaveform" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/MenuButton" unique_id=810691651 node_paths=PackedStringArray("node")]
 script = ExtResource("4_6wfxj")
-node = NodePath("../../../../../..")
+node = NodePath("../../../../..")
 property_path = "waveform"
 metadata/_custom_type_script = "uid://db4chh8t0wooi"
 
-[node name="PropertyGetterSetterMute" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl/MenuButton" unique_id=24922110 node_paths=PackedStringArray("node")]
+[node name="PropertyGetterSetterMute" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/MenuButton" unique_id=24922110 node_paths=PackedStringArray("node")]
 script = ExtResource("4_6wfxj")
 id = 1
-node = NodePath("../../../../../..")
+node = NodePath("../../../../..")
 property_path = "muted"
 metadata/_custom_type_script = "uid://db4chh8t0wooi"
 
-[node name="PropertyGetterSetterHitsounds" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl/MenuButton" unique_id=862220803 node_paths=PackedStringArray("node")]
+[node name="PropertyGetterSetterHitsounds" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/MenuButton" unique_id=862220803 node_paths=PackedStringArray("node")]
 script = ExtResource("4_6wfxj")
 id = 2
-node = NodePath("../../../../../..")
+node = NodePath("../../../../..")
 property_path = "hitsounds"
 metadata/_custom_type_script = "uid://db4chh8t0wooi"
 
-[node name="Label" type="Label" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=549249472]
+[node name="Label" type="Label" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=549249472]
 layout_mode = 2
+size_flags_horizontal = 10
 text = "Keys:"
+horizontal_alignment = 2
+
+[node name="ReceptorControl" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=1060206205 node_paths=PackedStringArray("editor_strumline")]
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("2_cq5xl")
+editor_strumline = NodePath("../../../..")
 
 [node name="RemoveReceptor" type="Button" parent="InfoPanel/InfoMargin/InfoVBox/ReceptorControl" unique_id=1961325852]
 layout_mode = 2
@@ -106,19 +109,16 @@ layout_mode = 2
 focus_mode = 0
 icon = SubResource("AtlasTexture_wb80q")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=466850363]
-layout_mode = 2
-
-[node name="MuteCheckBox" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer2" unique_id=1836110026]
+[node name="MuteCheckBox" type="CheckBox" parent="InfoPanel/InfoMargin/InfoVBox" unique_id=1836110026]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 focus_mode = 0
 text = "CPU"
 
-[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/HBoxContainer2/MuteCheckBox" unique_id=572545642 node_paths=PackedStringArray("node")]
+[node name="PropertyGetterSetterCheckBox" type="Node" parent="InfoPanel/InfoMargin/InfoVBox/MuteCheckBox" unique_id=572545642 node_paths=PackedStringArray("node")]
 script = ExtResource("4_mbbuy")
-node = NodePath("../../../../../..")
+node = NodePath("../../../../..")
 property_path = "strumline:cpu"
 metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
 
