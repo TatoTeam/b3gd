@@ -60,6 +60,7 @@ func handle_note(strum_line_id, receptor_id):
 	var next_note = receptor.notes[current_note_id + 1]
 	if next_note.time <= song_audio_player.song_position_seconds:
 		hit_note_ids[strum_line_id][receptor_id] = current_note_id + 1
-		note_manager.note_press.emit(strum_line_id, receptor_id, next_note, 0.0)
-		if frames_born > 5 && strum_line_container.strumlines[strum_line_id].hitsounds:
-			polyphonic_playback.play_stream(NOTE_CLICK)
+		if !song_audio_player.paused:
+			note_manager.note_press.emit(strum_line_id, receptor_id, next_note, 0.0)
+			if frames_born > 5 && strum_line_container.strumlines[strum_line_id].hitsounds:
+				polyphonic_playback.play_stream(NOTE_CLICK)
