@@ -8,7 +8,7 @@ func _process(_delta: float) -> void:
 	paste_button.disabled = !(ChartEditor.clipboard.size())
 
 func _on_copy_button_pressed() -> void:
-	ChartEditor.clipboard = ChartEditor.selection
+	ChartEditor.clipboard = ChartEditor.selection.duplicate(false)
 
 func _on_paste_button_pressed() -> void:
 	pass

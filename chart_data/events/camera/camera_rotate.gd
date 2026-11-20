@@ -9,6 +9,7 @@ func init():
 	if parent.get_tree().get_first_node_in_group("SceneCamera") == null:
 		force_ignore = true
 		return
+	
 	tween_tracker.node = self
 	tween_tracker.property = "rotation_tween"
 	

@@ -734,6 +734,23 @@ node = NodePath("../../../../../../../../..")
 property_path = "inst_muted"
 metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
 
+[node name="MuteInstLabel2" type="Label" parent="UIContainer/RightBarScroll/RightBarContainer/EditorOptionsPanel/Margin/VBox/PlaybackFieldContainer" unique_id=1847968644]
+layout_mode = 2
+text = "Vortex Input:"
+
+[node name="VortexInput" type="CheckBox" parent="UIContainer/RightBarScroll/RightBarContainer/EditorOptionsPanel/Margin/VBox/PlaybackFieldContainer" unique_id=2002143593]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_mode = 0
+alignment = 1
+
+[node name="PropertyGetterSetterCheckBox" type="Node" parent="UIContainer/RightBarScroll/RightBarContainer/EditorOptionsPanel/Margin/VBox/PlaybackFieldContainer/VortexInput" unique_id=28669572 node_paths=PackedStringArray("node")]
+script = ExtResource("20_tfe68")
+node = NodePath("../../../../../../../../..")
+property_path = "inst_muted"
+metadata/_custom_type_script = "uid://d1cnb4hugwiyp"
+
 [node name="Images" type="Control" parent="." unique_id=1867479190]
 layout_mode = 2
 mouse_filter = 2

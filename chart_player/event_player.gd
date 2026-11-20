@@ -33,7 +33,7 @@ func process_events() -> bool:
 		if events[-1].time <= song_audio_player.song_position_seconds:
 			last_played_event = max(events.size() - 1, -1)
 			events[last_played_event].play(song_audio_player.pitch_scale * -1)
-		return false
+		return false # Clamped to last event in array, play last event in reverse
 	
 	if last_played_event != -1 and events[last_played_event].time > song_audio_player.song_position_seconds:
 		events[last_played_event].play(song_audio_player.pitch_scale * -1)
