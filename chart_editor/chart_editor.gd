@@ -11,6 +11,7 @@ static var song_audio_player: SongAudioPlayer:
 		return instance._song_audio_player
 
 static var selection: Array[TimelinePoint] = []
+static var clipboard: Array[TimelinePoint] = []
 
 static var current_note_type: String
 
