@@ -42,6 +42,9 @@ func _process(_delta):
 func select_inside():
 	visible = false
 	
+	if size.x < 10 && size.y < 10:
+		return
+	
 	var selectables: Array[TimelinePoint] = []
 	
 	for node: Control in get_tree().get_nodes_in_group(&"Selectable"):
