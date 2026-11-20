@@ -33,9 +33,6 @@ var _song_audio_player: SongAudioPlayer
 
 var _undo_redo: UndoRedo
 
-
-const QUANT_LIST := [4, 8, 12, 16, 24, 32, 48, 64]
-
 static var QUANT_COLORS: Array[Color] = [
 	Color.from_string("e01e00", Color.BLACK),
 	Color.from_string("003fed", Color.BLACK),
@@ -51,12 +48,14 @@ static var QUANT_COLORS: Array[Color] = [
 static func get_quant_id(note_time: float) -> int:
 	return get_quant_id_from_beat(ChartEditor.song_audio_player.get_beat_from_seconds(note_time))
 
+const QUANT_LIST := [48, 24, 16, 12, 8, 6, 4, 3]
+
 static func get_quant_id_from_beat(note_beat: float) -> int:
-	var note_beat_sm: int = round(note_beat * 48.0)
+	var note_beat_quant_res: int = round(note_beat * QUANT_LIST[0])
 	for i in QUANT_LIST.size():
-		if note_beat_sm % (192 / QUANT_LIST[i]) == 0:
+		if note_beat_quant_res % QUANT_LIST[i] == 0:
 			return i
-	return 8
+	return QUANT_LIST.size() - 1
 
 static func get_quant_color(note_time: float) -> Color:
 	return QUANT_COLORS[get_quant_id(note_time)]
