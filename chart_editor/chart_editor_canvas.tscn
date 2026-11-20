@@ -13,6 +13,7 @@ script = ExtResource("1_5b7pn")
 chart_editor = NodePath("EditorViewport/SubViewport/EditorUI")
 
 [node name="EditorViewport" type="SubViewportContainer" parent="." unique_id=825030729]
+texture_filter = 1
 material = SubResource("CanvasItemMaterial_yt480")
 anchors_preset = 15
 anchor_right = 1.0
