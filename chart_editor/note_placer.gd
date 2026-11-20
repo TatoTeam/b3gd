@@ -100,6 +100,9 @@ func add_note():
 	
 	var receptor: Receptor = strumline_object.strumline.receptors.get(note_dir)
 	var new_note: Note = load(ChartEditor.current_note_type).new()
+	var note_class = new_note.get_script().get_global_name()
+	if ChartEditor.instance.settings.note_type_settings.has(note_class):
+		new_note = ChartEditor.instance.settings.note_type_settings[note_class].duplicate()
 	new_note.time = note_time
 	new_note.length = note_length
 	
@@ -115,6 +118,7 @@ func add_note():
 		ChartLoader.instance.load_notes()
 	)
 	ChartEditor.undo_redo.commit_action()
+	ChartEditor.instance.settings.note_type_settings.set(new_note.get_script().get_global_name(), new_note)
 
 func _process(_delta):
 	if strumline_object.strumline == null or strumline_object.strumline.receptors.is_empty():
